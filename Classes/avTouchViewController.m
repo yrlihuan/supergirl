@@ -10,7 +10,7 @@
 @synthesize array;
 @synthesize player;
 
-// Test Comments
+// Test Comments 2
 
 /*
 // Override initWithNibName:bundle:	 to load the view using a nib file then perform additional customization that is not appropriate for viewDidLoad.
