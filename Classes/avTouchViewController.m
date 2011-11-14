@@ -9,8 +9,11 @@
 @synthesize movieplayer;
 @synthesize array;
 @synthesize player;
+
+// Test Comments 2
+
 /*
-// Override initWithNibName:bundle: to load the view using a nib file then perform additional customization that is not appropriate for viewDidLoad.
+// Override initWithNibName:bundle:	 to load the view using a nib file then perform additional customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Custom initialization
