@@ -10,11 +10,12 @@
 
 @implementation PicturesWallController
 
-@synthesize showScreen,picturesWall,back;
+@synthesize showScreen,picturesWall,buttonGetBack;
 @synthesize pictureViewController;
 @synthesize screenViewController;
 @synthesize thisFather;
 @synthesize thumbnailNames;
+@synthesize topToolBar;
 
 #define viewWidth 320
 #define totalNumber 10
@@ -36,27 +37,19 @@ double picturesWallSize;
 
 - (IBAction)clickSreenButton:(id)sender
 {
-    //self.navigationController ;
-    NSLog(@"clickScreen");
     if (screenViewController == nil)
         NSLog(@"Good bye");
     [screenViewController startAnimate];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [self presentModalViewController:screenViewController animated:YES];
 }
-- (IBAction)goBack:(id)sender
+- (IBAction)toGetBack:(id)sender
 {
     [thisFather dismissModalViewControllerAnimated:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault]; 
     [NSTimer timerWithTimeInterval:0.1 target:thisFather selector:@selector(clearPhoto) userInfo:nil repeats:NO];
 }
 
-/*
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    
-}
- */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -73,28 +66,31 @@ double picturesWallSize;
     
     // Release any cached data, images, etc that aren't in use.
 }
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
+- (void)initPicturesWall
 {
-    [super viewDidLoad];   
-    thumbnailNames = [[NSArray alloc] initWithObjects:@"01段林希-1.jpg",@"01段林希-2.jpg",@"02洪辰-1.jpg",@"02洪辰-2.jpg",@"03刘忻-1.jpg",@"03刘忻-2.jpg",@"04苏秒玲-1.jpg",@"04苏秒玲-2.jpg",@"05杨洋-1.jpg",@"05杨洋-2.jpg", nil];
-    //[self.view setFrame:CGRectMake(0, - 64, 320, 480)];
-    self.navigationItem.rightBarButtonItem = self.showScreen;
-    self.navigationItem.leftBarButtonItem = self.back;
-    self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];
+    thumbnailNames = [[NSArray alloc] initWithObjects:@"01段林希-1.jpg",@"01段林希-2.jpg",@"02洪辰-1.jpg",@"02洪辰-2.jpg",@"03刘忻-1.jpg",@"03刘忻-2.jpg",@"04苏妙玲-1.jpg",@"04苏妙玲-2.jpg",@"05杨洋-1.jpg",@"05杨洋-2.jpg", nil];
+    
     picturesWall = [[UIScrollView alloc] init];
-    [picturesWall setFrame:CGRectMake(0, - 64, 320, 480)];
+    [picturesWall setBackgroundColor:[UIColor viewFlipsideBackgroundColor]];
+    [picturesWall setFrame:CGRectMake(0, -20, 320, 480)];
     [self initSubview];
     picturesWall.delegate = self;
     [self.view addSubview:picturesWall];
+    [self.view sendSubviewToBack:picturesWall];
     
     self.navigationController.navigationBar.alpha = showAlpha;
     
     screenViewController.thisFather = self;
-    // UINavigationController
     
+}
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.view sendSubviewToBack:topToolBar];
+    [self initPicturesWall];
+    [screenViewController firstInit];
     // Do any additional setup after loading the view from its nib.
 }
 - (void)initSubview
@@ -135,9 +131,9 @@ double picturesWallSize;
 		UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
 		// setup each frame to a default height and width, it will be properly placed when we call "updateScrollList"
 		CGRect rect = CGRectMake(start.x, start.y, thumbnailWidth, thumbnailHeight);
-        //NSLog(@"number :%d start-x:%f start-y:%f",i,rect.origin.x,rect.origin.y);
 		imageView.frame = rect;
-		imageView.tag = i;	// tag our images for later use when we place them in serial fashion
+		imageView.tag = i;	
+        // tag our images for later use when we place them in serial fashion
         [picturesWall addSubview:imageView];
         
         imageView.userInteractionEnabled = YES;
@@ -166,19 +162,16 @@ double picturesWallSize;
 - (void)viewDidUnload
 {
     [showScreen release];
-    [back release];
+    [buttonGetBack release];
     [picturesWall release];
     [thisFather release];
     [pictureViewController release];
     [screenViewController release];
     [thumbnailNames release];
+    [topToolBar release];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    NSLog(@"I have ideas!");
 }
 - (void)clickThisImage:(id)sender
 {
@@ -198,6 +191,9 @@ double picturesWallSize;
      */
     [self.navigationController pushViewController:pictureViewController animated:YES];
     [pictureViewController startView:((TapGestureRecognizer *)sender).imageIndex];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

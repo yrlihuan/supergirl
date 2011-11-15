@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InfoViewController.h"
 
 #define pictureWidth 320
 #define pictureGap 0
@@ -14,29 +15,9 @@
 #define pictureWidthInterval (pictureWidth + pictureGap)
 #define pictureSum 10
 #define showAlpha 0.8
-@interface InfoViewController : UIViewController <UIScrollViewDelegate>
-{
-    IBOutlet UITextView *textView;
-    IBOutlet UIImageView *profileView;
-    
-    int currentIndex;
-    
-}
-
-@property (nonatomic,retain) IBOutlet UITextView *textView;
-@property (nonatomic,retain) IBOutlet UIImageView *profileView;
-
-@end
+// below is the PictureViewController : UIViewController <UIScrollViewDelegate>
 @interface PictureViewController : UIViewController <UIScrollViewDelegate>
-{
-    IBOutlet UIToolbar *toolbar;
-    IBOutlet UIScrollView *thisScrollView;
-    IBOutlet UIBarButtonItem *profileButton;
-    IBOutlet UIBarButtonItem *lastButton;
-    IBOutlet UIBarButtonItem *nextButton;
-    
-    InfoViewController *infoViewController;
-    
+{    
     NSArray *viewArray;
     int currentIndex;
     int lastIndex;
@@ -49,11 +30,16 @@
     
     bool whetherSaved[pictureSum];    
 }
-
-@property (nonatomic,retain) IBOutlet UIToolbar *toolbar;
+// this is for displaying
+@property (nonatomic,retain) IBOutlet UIImageView *toolbar;
 @property (nonatomic,retain) IBOutlet UIScrollView *thisScrollView;
-@property (nonatomic,retain) IBOutlet UIBarButtonItem *profileButton;
-@property (nonatomic,retain) IBOutlet UIBarButtonItem *lastButton,*nextButton;
+@property (nonatomic,retain) IBOutlet UIButton *profileButton;
+@property (nonatomic,retain) IBOutlet UIButton *loadButton,*lastButton,*nextButton;
+@property (nonatomic,retain) IBOutlet UIButton *buttonGetBack;
+@property (nonatomic,retain) IBOutlet UIImageView *topToolBar;
+@property (nonatomic,retain) IBOutlet UILabel *showIndex;
+
+// below is for data controlling
 @property (nonatomic,retain) NSArray *viewArray;
 @property (nonatomic,retain) InfoViewController *infoViewController;
 @property (assign) int pictureIndex;
@@ -62,18 +48,19 @@
 
 
 - (void)setViews:(int)where sourceWith:(int)source;
-- (IBAction)showProfile:(id)sender;
-- (IBAction)lastPicture:(id)sender;
-- (IBAction)nextPicture:(id)sender;
+- (IBAction)showProfile:(UIButton *)sender;
+- (IBAction)lastPicture:(UIButton *)sender;
+- (IBAction)nextPicture:(UIButton *)sender;
 - (void)startView:(int)source;
-- (void)moveForLast;
-- (void)moveForNext;
+//- (void)moveForLast;
+//- (void)moveForNext;
 - (void)chooseThisImage:(id)sender;
 - (void)initAllViews;
-- (void)initSuperViews;
+//- (void)initSuperViews;
 - (void)initScrollView;
-- (IBAction)downLoad;
+- (IBAction)downLoad:(UIButton *)sender;
 - (void)savePhoto;
 - (void)setIndex;
+- (IBAction)toGetBack:(UIButton *)sender;
 
 @end

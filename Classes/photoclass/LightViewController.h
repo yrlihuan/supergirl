@@ -11,14 +11,19 @@
 
 @interface LightViewController : UIViewController <UIScrollViewDelegate> {
     bool beHidden;
-    double thisAlpha;
 }
-@property (nonatomic,retain) IBOutlet UINavigationBar *navigationBar;
-@property (nonatomic,retain) IBOutlet UIScrollView *thisScrollView;
-@property (nonatomic,retain) UIViewController *thisFather;
+//used to get back to the mainview
+@property (nonatomic, retain) UIViewController *thisFather;
+
+//used to show in the view
+@property (nonatomic, retain) IBOutlet UIScrollView *thisScrollView;
+@property (nonatomic, retain) IBOutlet UIImageView *topToolBar;
+@property (nonatomic, retain) IBOutlet UIButton *buttonGetBack;
 
 
 - (void)chooseThisImage:(id)sender;
 
 - (IBAction)toGetBack:(UIButton*)sender;
+
+- (void)initScrollView;
 @end

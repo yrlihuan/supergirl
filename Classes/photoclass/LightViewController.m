@@ -10,15 +10,21 @@
 
 
 @implementation LightViewController
-@synthesize navigationBar;
 @synthesize thisScrollView;
 @synthesize thisFather;
-
-- (void)viewDidLoad
+@synthesize topToolBar;
+@synthesize buttonGetBack;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    thisAlpha = 0.5;
-    navigationBar.alpha = thisAlpha;
-    [self.view setFrame:CGRectMake(0, 0, 320, 480)];
+    if (scrollView == thisScrollView && beHidden == false)
+    {
+        [self chooseThisImage:nil];
+    }
+}
+- (void)initScrollView
+{
+    //init the basic settings of scrollview
+    [thisScrollView setFrame:CGRectMake(0, -20, 320, 500)];
     [thisScrollView setBackgroundColor:[UIColor blackColor]];
     [thisScrollView setCanCancelContentTouches:NO];
     thisScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
@@ -26,8 +32,16 @@
     thisScrollView.scrollEnabled = YES;    
 	thisScrollView.pagingEnabled = YES;
     
+    //set scrollview's gesture
+    thisScrollView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseThisImage:)];
+    doubleTap.numberOfTapsRequired = 1;
+    [thisScrollView addGestureRecognizer:doubleTap];
+    [doubleTap release];
+    
+    //set the content of scrollview
     int LightSum = 17;
-    [thisScrollView setContentSize:CGSizeMake(320 * LightSum, 460)];
+    [thisScrollView setContentSize:CGSizeMake(320 * LightSum, 480)];
     [thisScrollView setContentOffset:CGPointMake(0, 0)];
     NSArray *names = [[NSArray alloc] initWithObjects:@"名字--妙.jpg", @"名字--希.jpg", @"名字--希紫色.jpg",@"名字--忻.jpg",@"名字--洋.jpg",@"名字--洪.jpg",@"名字--辰.jpg",@"妙恋.jpg",@"小红帽.jpg",@"星星--紫红色.jpg",@"星星--紫色.jpg",@"星星--红色.jpg",@"星星--绿色.jpg",@"星星--蓝色.jpg",@"紫红.jpg",@"紫色.jpg",@"芯片.jpg",nil];
     for (int i = 0;i < LightSum;i ++)
@@ -35,39 +49,48 @@
         UIImage * image = [UIImage imageNamed:[names objectAtIndex:i]];
         UIImageView * imageView = [[UIImageView alloc] initWithImage:image];
         [thisScrollView addSubview:imageView];
-        [imageView setFrame:CGRectMake(i * 320, -20, 320, 480)];
+        [imageView setFrame:CGRectMake(i * 320, 0, 320, 480)];
         [imageView release];
     }
     [names release];
     [self.view sendSubviewToBack:thisScrollView];
     
-    thisScrollView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseThisImage:)];
-    doubleTap.numberOfTapsRequired = 1;
-    //doubleTap.delegate = self;
-    [thisScrollView addGestureRecognizer:doubleTap];
-    [doubleTap release];
+}
+
+- (void)viewDidLoad
+{
+    beHidden = false;
+    [self.view setFrame:CGRectMake(0, 0, 320, 480)];
+    [self initScrollView];
     
 }
 - (void)viewDidUnload
 {
-    [navigationBar release];
+    [topToolBar release];
     [thisScrollView release];
     [thisFather release];
+    [buttonGetBack release];
     
 }
-- (void)chooseThisImage:(id)sender
+- (void)chooseThisImage:(UITapGestureRecognizer *)sender
 {
-    NSLog(@"You double click");
+    if (sender != nil)
+    {
+        // if touch the topToolBar already seen, do nothing!
+        if ([sender locationInView:thisScrollView].y < 64.0f && !beHidden)
+            return;
+    }
     beHidden = !beHidden;
     if (beHidden)
     {
-        navigationBar.alpha = 0.0;
+        [topToolBar setHidden:YES];
+        [buttonGetBack setHidden:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
     }
     else
     {
-        navigationBar.alpha = thisAlpha;
+        [buttonGetBack setHidden:NO];
+        [topToolBar setHidden:NO];
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
     }
     
