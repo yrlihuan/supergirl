@@ -44,8 +44,6 @@
     NSTimer                             *cdtimer;
     NSTimer                             *cdmovetimer;
 	NSTimer								*updateTimer;
-	NSTimer								*rewTimer;
-	NSTimer								*ffwTimer;
     NSTimer                             *myTimer;
     NSInteger                           listplaying;
 	float                               timetemp;
@@ -65,6 +63,11 @@
 
 
 - (void)registerForBackgroundNotifications;
+- (void)updateViewForPlayerInfo:(AVAudioPlayer*)p;
+- (void)startPlaybackForPlayer:(AVAudioPlayer*)p;
+- (void)updateViewForPlayerState:(AVAudioPlayer *)p;
+- (void)lycshow;
+
 
 @property (nonatomic, retain)	UILabel			*fileName;
 @property (nonatomic, retain)	UIButton		*playButton;
