@@ -16277,9 +16277,9 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>342933903.43201798</real>
-		<string>{0, 962}</string>
-		<string>{589, 0}</string>
+		<real>342936768.20373601</real>
+		<string>{0, 845}</string>
+		<string>{190, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -20035,7 +20035,7 @@
 			</array>
 		</dict>
 		<string>CodeFolds</string>
-		<real>342933903.431835</real>
+		<real>342936768.20358801</real>
 		<string>{5651, 1550}</string>
 		<string>{6278, 0}</string>
 		<dict>
@@ -29064,7 +29064,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>342933903.44001597</real>
+		<real>342936768.20800501</real>
 		<string>{5651, 1550}</string>
 		<string>{6278, 0}</string>
 		<string>-voiceplay:</string>
@@ -31113,9 +31113,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>342933903.441167</real>
-		<string>{0, 962}</string>
-		<string>{589, 0}</string>
+		<real>342936768.20898801</real>
+		<string>{0, 845}</string>
+		<string>{190, 0}</string>
 		<string>@implementation avTouchViewController</string>
 		<dict>
 			<key>$class</key>
