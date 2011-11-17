@@ -15,6 +15,12 @@
 #define pictureWidthInterval (pictureWidth + pictureGap)
 #define pictureSum 10
 #define showAlpha 0.8
+
+#define VIEWWIDTH 320
+#define VIEWHEIGHT 480
+#define STATUSBARHEIGHT 20
+#define SCROLLWIDTH (VIEWWIDTH * PICTURESNUMBER)
+#define SCROLLHEIGHT VIEWHEIGHT
 // below is the PictureViewController : UIViewController <UIScrollViewDelegate>
 @interface PictureViewController : UIViewController <UIScrollViewDelegate>
 {    
