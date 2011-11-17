@@ -59,6 +59,7 @@
     //[[UIApplication sharedApplication] setStatusBarHidden:YES];
     // Override point for customization after app launch 
     //viewController=[[avTouchViewController alloc ] init];
+   
      [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 }

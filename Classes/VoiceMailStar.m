@@ -121,15 +121,16 @@
     NSMutableArray *dic = (NSMutableArray *)[parser objectWithString:result2] ;   
     for (int i=0; i<[dic count]; i++) {
         NSString*  voicename=[[dic objectAtIndex:i] objectForKey:@"url"];
-        NSLog(@"name2:%@",voicename);
+       
         [listData addObject:voicename];
         NSString* post_time=[[dic objectAtIndex:i] objectForKey:@"post_time"];
         [listData addObject:post_time];
         NSString* reply_int=[NSString stringWithFormat:@"%@",[[dic objectAtIndex:i] objectForKey:@"reply_cnt"]];
         [listData addObject:reply_int];
          //NSLog(@"reply_int   :%@",reply_int);
-        NSString* audio_id=[NSString stringWithFormat:@"%d",[[dic objectAtIndex:i] objectForKey:@"audio_id"]];
+        NSString* audio_id=[[dic objectAtIndex:i] objectForKey:@"audio_id"];
         [listData addObject:audio_id];
+         NSLog(@"name audio id:%@",audio_id);
 
         
     }
@@ -192,20 +193,17 @@
                   initWithContentURL:movieURL];
         [player.moviePlayer play];
     }
-   // [self.view addSubview:player.view];
-    
-    /*
-    player=[[MPMoviePlayerViewController alloc] initWithContentURL:movieURL];
-   // [player.moviePlayer play];
-    player.moviePlayer.view.frame = CGRectMake(0, 340, 320, 5);
-    [player.moviePlayer.view setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:player.view];*/
-    
-    //[self.view addSubview:musicPlayer.view];
-
-    NSLog(@"successful");
+      NSLog(@"successful");
 }
-
+-(void)voicereply:(id)sender{
+    VoiceReplyController* voicereplycontroller=[[VoiceReplyController alloc] init];
+    voicereplycontroller.starname=self.starname;
+    UIButton* replybt=(UIButton*)sender;
+    int  row=replybt.tag;
+    [voicereplycontroller getmusicid:[[listData objectAtIndex:(row*4+3)] intValue]];
+    NSLog(@"musicid:%d",[[listData objectAtIndex:(row*4+3)] intValue]);
+    [self presentModalViewController:voicereplycontroller animated:YES];
+}
 #pragma mark -
 #pragma mark Table View Data Source Methods
 - (NSInteger)tableView:(UITableView *)tableView
@@ -244,22 +242,24 @@
     //[voiceplaybt setImage:imageselected forState:UIControlEventTouchDown];
     voiceplaybt.tag=row;
     [voiceplaybt addTarget:self action:@selector(voiceplay:) forControlEvents:UIControlEventTouchDown];
-    //[self performSelector:@selector(voiceplay) withObject:voiceplaybt];
-   // voiceplaybt
-   // voiceplaybt.frame=CGRectMake(25, 40, 20 , 20);
     [cell.contentView addSubview:voiceplaybt];
     UIImageView*  cellback=[[UIImageView alloc] init];
     UIView * cellview=[[UIView alloc] init];
     cellback.frame=CGRectMake(10, 15, 220, 60);
-    
     cellback.image=[UIImage imageNamed:@"voicemail_back_2.png"];
     [cellview addSubview:cellback];
     cell.backgroundView=cellview;
     //cell.detailTextLabel.text=@"            %@";
     NSString *blank2=@"                                                    ";
-    cell.detailTextLabel.text=[blank2 stringByAppendingFormat:@"%@条留言",[listData objectAtIndex:(4*row+2)]];
-    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:15];
-    
+   // cell.detailTextLabel.text=[blank2 stringByAppendingFormat:@"%@条留言",[listData objectAtIndex:(4*row+2)]];
+   // cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:15];
+    UIButton *replybt=[[UIButton alloc] initWithFrame:CGRectMake(220, 40, 80, 20)];
+   // [replybt setImage:image forState:UIControlStateNormal];
+    [replybt setTitle:[NSString stringWithFormat:@"%@条留言",[listData objectAtIndex:(4*row+2)]] forState:UIControlStateNormal];
+    replybt.font=[UIFont boldSystemFontOfSize:15];
+    replybt.tag=row;
+    [replybt addTarget:self action:@selector(voicereply:) forControlEvents:UIControlEventTouchDown];
+    [cell.contentView addSubview:replybt];
     cell.textLabel.text = [blank stringByAppendingString:[listData objectAtIndex:(4*row+1)]];
     //cell.textLabel.center=CGPointMake(300, 40);
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
