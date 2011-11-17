@@ -10,6 +10,7 @@
 #import "VoiceMailController.h"
 #import "MediaPlayer/MediaPlayer.h"
 #import <AVFoundation/AVFoundation.h>
+#import "VoiceReplyController.h"
 @interface VoiceMailStar : UIViewController<UITableViewDelegate, UITableViewDataSource>{
     int  star_id;
     NSString* starname;

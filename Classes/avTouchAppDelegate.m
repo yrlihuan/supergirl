@@ -72,6 +72,7 @@
     // Override point for customization after app launch 
     //viewController=[[avTouchViewController alloc ] init];
     NSLog(@"MY:FinishLaunching");
+   
      [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 }
