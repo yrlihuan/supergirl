@@ -28,7 +28,10 @@
     
     bool beHidden;
     
-    bool whetherSaved[pictureSum];    
+    bool whetherSaved[pictureSum];
+    bool ableZoom;
+    CGSize normalSize;
+
 }
 // this is for displaying
 @property (nonatomic,retain) IBOutlet UIImageView *toolbar;

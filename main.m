@@ -51,6 +51,7 @@ Copyright (C) 2011 Apple Inc. All Rights Reserved.
 
 int main(int argc, char *argv[]) {
     
+    NSLog(@"MY:I start");
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     int retVal = UIApplicationMain(argc, argv, nil, nil);
     [pool release];

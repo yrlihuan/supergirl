@@ -42,10 +42,6 @@
 {
     [self setIndex];     
 }
-- (void)toFinish:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    return;
-}
 - (void)savePhoto
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -54,7 +50,7 @@
     NSLog(@"%02d.jpg",pictureIndex);
     
     UIImageWriteToSavedPhotosAlbum(pic, nil,nil,nil);
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"SavePhoto" message:@"This photo has been save to photo album" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"SavePhoto" message:@"This photo has been saved to photo album" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
     [alert release];
     
@@ -227,22 +223,44 @@
     [self.view addSubview:thisScrollView];
     [self.view sendSubviewToBack:thisScrollView];
     
-    
     beHidden = false;
     self.navigationController.navigationBar.alpha = showAlpha;
     toolbar.alpha = showAlpha;
     
-    
     thisScrollView.delegate = self;
-    [thisScrollView setContentSize:CGSizeMake(pictureWidth + pictureWidthInterval * (pictureSum - 1),  pictureHeightInside)];
+    [thisScrollView setContentSize:normalSize];
+    
+    thisScrollView.minimumZoomScale = 1.0;
+    thisScrollView.maximumZoomScale = 3.0;
     
     //NSLog(@"%d views",[viewArray count]);
     
 }
-
+/* the zoom function*/
+-(UIView*)viewForZoomingInScrollView:(UIScrollView*)scrollView
+{
+    if (ableZoom)
+        return [scrollView.subviews objectAtIndex:(pictureIndex + 1)];
+    return nil;
+}
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale
+{
+    if (ableZoom)
+    {
+        [thisScrollView setContentSize:CGSizeMake(normalSize.width*scale,normalSize.height*scale)];
+        NSArray *views = scrollView.subviews;
+        for (int i = 2;i < [views count];i ++)
+        {
+            [[views objectAtIndex:i] setContentSize:CGSizeMake(320 * scale, 480 * scale)];
+        }
+    }
+}
 - (void)viewDidLoad
 {
+    ableZoom = false;
+    normalSize = CGSizeMake(pictureWidth + pictureWidthInterval * (pictureSum - 1),  pictureHeightInside);
     [super viewDidLoad];
+    //01dlx-1.jpg
     picNames = [[NSArray alloc] initWithObjects:@"01dlx-1.jpg",@"01dlx-2.jpg",@"02hc-1.jpg",@"02hc-2.jpg",@"03lx-1.jpg",@"03lx-2.jpg",@"04sml-1.jpg",@"04sml-2.jpg",@"05yy-1.jpg",@"05yy-2.jpg", nil];
     [self initScrollView];
     [self initAllViews];
@@ -300,29 +318,6 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-/*
-- (void)moveForLast
-{
-    pictureIndex --;
-    lastIndex = (lastIndex + 2)%3;
-    currentIndex = (currentIndex + 2)%3;
-    nextIndex = (nextIndex + 2)%3;
-    if (pictureIndex - 1 >= 1)
-        [self setViews:lastIndex sourceWith:(pictureIndex - 1)];
-    if (pictureIndex + 1 <= pictureSum)
-        [self setViews:nextIndex sourceWith:(pictureIndex + 1)];  
-}
-- (void)moveForNext
-{
-    pictureIndex ++;
-    lastIndex = (lastIndex + 1)%3;
-    currentIndex = (currentIndex + 1)%3;
-    nextIndex = (nextIndex + 1)%3;
-    if (pictureIndex - 1 >= 1)
-        [self setViews:lastIndex sourceWith:(pictureIndex - 1)];
-    if (pictureIndex + 1 <= pictureSum)
-        [self setViews:nextIndex sourceWith:(pictureIndex + 1)];    
-}*/
 - (IBAction)lastPicture:(id)sender
 {
     if (pictureIndex - 1 < 1)

@@ -81,7 +81,6 @@ double picturesWallSize;
     self.navigationController.navigationBar.alpha = showAlpha;
     
     screenViewController.thisFather = self;
-    
 }
 #pragma mark - View lifecycle
 

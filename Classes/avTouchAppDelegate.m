@@ -55,10 +55,23 @@
 @synthesize window;
 @synthesize viewController;
 
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    NSLog(@"MY:becomeActive");
+}
+- (void)applicationDidEnterBackground:(UIApplication *)application __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_4_0)
+{
+    NSLog(@"MY:EnterBackground");    
+}
+- (void)applicationWillEnterForeground:(UIApplication *)application __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_4_0)
+{
+    NSLog(@"MY:EnterForeground");    
+}
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     //[[UIApplication sharedApplication] setStatusBarHidden:YES];
     // Override point for customization after app launch 
     //viewController=[[avTouchViewController alloc ] init];
+    NSLog(@"MY:FinishLaunching");
      [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 }

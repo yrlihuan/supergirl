@@ -56,7 +56,8 @@ const int pictureAmount = 10;
     [self setCalendar];
     departureFlag = true;
     lockedFlag = false;
-    pictureIndex = 1;
+    pictureIndex = arc4random()%pictureAmount + 1;
+    //pictureIndex = 1;
     secondCount = timerInterval;
     [self tickTick];
     return;
@@ -84,7 +85,7 @@ const int pictureAmount = 10;
     
     NSString *minuteString = [NSString stringWithFormat:  @"%02d",minute];
     NSString *hourString = [NSString stringWithFormat:  @"%02d",hour];
-    NSString *timeString = [NSString stringWithFormat:@"%@ : %@",hourString,minuteString];
+    NSString *timeString = [NSString stringWithFormat:@"%@:%@",hourString,minuteString];
     
     [dateReveal setText:dateString];
     [timeReveal setText:timeString];
