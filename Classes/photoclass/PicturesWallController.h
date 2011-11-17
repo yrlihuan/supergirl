@@ -12,27 +12,30 @@
 
 @interface PicturesWallController : UIViewController <UIScrollViewDelegate>
 {
-    IBOutlet UIBarButtonItem *showScreen;
-    IBOutlet UIBarButtonItem *back;
     UIScrollView *picturesWall;
     UIViewController *thisFather;
 }
 
-
-@property (nonatomic,retain) IBOutlet UIBarButtonItem *showScreen,*back;
+// UIObjects for displaying
+@property (nonatomic,retain) IBOutlet UIButton *showScreen,*buttonGetBack;
+@property (nonatomic,retain) IBOutlet UIImageView *topToolBar;
+// Data for controlling
 @property (nonatomic,retain) UIScrollView *picturesWall;
+@property (nonatomic,retain) NSArray *thumbnailNames;
+// Other controllers
 @property (nonatomic,retain) IBOutlet PictureViewController *pictureViewController;
 @property (nonatomic,retain) IBOutlet ScreenViewController *screenViewController;
+// for getting back
 @property (nonatomic,retain) UIViewController *thisFather;
-@property (nonatomic,retain) NSArray *thumbnailNames;
 
 - (IBAction)clickSreenButton:(id)sender;
-- (IBAction)goBack:(id)sender;
+- (IBAction)toGetBack:(id)sender;
+
 - (void)initSubview;
 - (void)clickThisImage:(id)sender;
 - (void)viewWillAppear:(BOOL)animated;
+- (void)initPicturesWall;
 
-//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
 @end
 
 @interface TapGestureRecognizer : UITapGestureRecognizer

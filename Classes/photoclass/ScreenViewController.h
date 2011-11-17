@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface ScreenViewController : UIViewController
@@ -19,6 +20,7 @@
     bool departureFlag;
     bool lockedFlag;
     int pictureIndex;
+    int secondCount;
     UIViewController *thisFather;
 }
 @property (nonatomic,retain) IBOutlet UILabel *timeReveal;
@@ -27,10 +29,13 @@
 @property (nonatomic,retain) IBOutlet UIButton * lockButton;
 @property (nonatomic,retain) IBOutlet UIImageView *pictureView;
 @property (nonatomic,retain) UIViewController *thisFather;
+@property (nonatomic,retain) NSArray *picNames;
 
 - (void)setCalendar;
+- (void)tickTick;
 - (void)changePicture;
 - (IBAction)viewDeparture:(UIButton *)sender;
 - (void)startAnimate;
 - (IBAction)viewLocked:(UIButton *)sender;
+- (void)firstInit;
 @end

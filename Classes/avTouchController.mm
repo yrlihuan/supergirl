@@ -111,14 +111,16 @@ void audioRouteChangeListenerCallback (
 	if (p.playing)
 	{
 		[playButton setImage:((p.playing == YES) ? pauseBtnBG : playBtnBG) forState:UIControlStateNormal];
+        [musicButton setHidden:YES];
         [musicButton setImage:((p.playing == YES) ? musicpauseBtnBG : musicplayBtnBG) forState:UIControlStateNormal];
 		[lvlMeter_in setPlayer:p];
-		updateTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(updateCurrentTime) userInfo:p repeats:YES];
+		updateTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(updateCurrentTime) userInfo:p repeats:YES];
        
 	}
 	else
 	{
 		[playButton setImage:((p.playing == YES) ? pauseBtnBG : playBtnBG) forState:UIControlStateNormal];
+        [musicButton setHidden:NO];
         [musicButton setImage:((p.playing == YES) ? musicpauseBtnBG : musicplayBtnBG) forState:UIControlStateNormal];
 		[lvlMeter_in setPlayer:nil];
 		updateTimer = nil;
@@ -148,19 +150,6 @@ void audioRouteChangeListenerCallback (
 	volumeSlider.value = p.volume;
 }
 
-- (void)rewind
-{
-	AVAudioPlayer *p = rewTimer.userInfo;
-	p.currentTime-= SKIP_TIME;
-	[self updateCurrentTimeForPlayer:p];
-}
-
-- (void)ffwd
-{
-	AVAudioPlayer *p = ffwTimer.userInfo;
-	p.currentTime+= SKIP_TIME;	
-	[self updateCurrentTimeForPlayer:p];
-}
 - (IBAction)musiclist:(UIButton *)sender
 {
     /*
@@ -280,8 +269,6 @@ void audioRouteChangeListenerCallback (
 	[self registerForBackgroundNotifications];
 			
 	updateTimer = nil;
-	rewTimer = nil;
-	ffwTimer = nil;
     cdtimer=nil;
     cdmovetimer=nil;
 	
@@ -477,10 +464,6 @@ void audioRouteChangeListenerCallback (
 
 - (IBAction)rewButtonPressed:(UIButton *)sender
 {
-    /*
-	if (rewTimer) [rewTimer invalidate];
-	rewTimer = [NSTimer scheduledTimerWithTimeInterval:SKIP_INTERVAL target:self selector:@selector(rewind) userInfo:player repeats:YES];
-     */
     if (songplaying>1) {
         songplaying=songplaying-1;
         [self updateSong];
@@ -489,8 +472,6 @@ void audioRouteChangeListenerCallback (
 
 - (IBAction)rewButtonReleased:(UIButton *)sender
 {
-	if (rewTimer) [rewTimer invalidate];
-	rewTimer = nil;
 }
 
 - (IBAction)ffwButtonPressed:(UIButton *)sender
@@ -506,8 +487,6 @@ void audioRouteChangeListenerCallback (
 
 - (IBAction)ffwButtonReleased:(UIButton *)sender
 {
-	if (ffwTimer) [ffwTimer invalidate];
-	ffwTimer = nil;
 }
 
 - (IBAction)volumeSliderMoved:(UISlider *)sender

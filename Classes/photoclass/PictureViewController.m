@@ -13,12 +13,35 @@
 @synthesize toolbar;
 @synthesize thisScrollView;
 @synthesize profileButton;
-@synthesize lastButton,nextButton;
+@synthesize loadButton,lastButton,nextButton;
 @synthesize pictureIndex;
 @synthesize viewArray;
 @synthesize infoViewController;
 @synthesize picNames;
+@synthesize buttonGetBack;
+@synthesize topToolBar;
+@synthesize showIndex;
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (scrollView == thisScrollView && beHidden == false)
+    {
+        [self chooseThisImage:nil];
+    }
+    [self setIndex];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+{
+    [self setIndex];
+}
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    [self setIndex];    
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self setIndex];     
+}
 - (void)toFinish:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     return;
@@ -27,10 +50,10 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    UIImage *pic = [UIImage imageNamed:[NSString stringWithFormat:@"%02d.jpg",pictureIndex]];
+    UIImage *pic = [UIImage imageNamed:[picNames objectAtIndex:pictureIndex-1]];
     NSLog(@"%02d.jpg",pictureIndex);
     
-    UIImageWriteToSavedPhotosAlbum(pic, nil,nil,nil);//self, @selector(toFinish), @"abc");
+    UIImageWriteToSavedPhotosAlbum(pic, nil,nil,nil);
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"SavePhoto" message:@"This photo has been save to photo album" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
     [alert release];
@@ -40,9 +63,13 @@
 - (void)setIndex
 {
     pictureIndex = (thisScrollView.contentOffset.x/pictureWidthInterval + 1);
-    
+    [showIndex setText:[NSString stringWithFormat:@"%d/%d",pictureIndex,pictureSum]];
 }
-- (IBAction)downLoad
+- (IBAction)toGetBack:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)downLoad:(UIButton *)sender
 {
     [self setIndex];
     if (whetherSaved[pictureIndex - 1] == true)
@@ -60,13 +87,14 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
     }
     return self;
 }
 - (IBAction)showProfile:(id)sender
-{
-    NSLog(@"click profile");
+{    
+    infoViewController.currentIndex = pictureIndex;    
+    [infoViewController setContent];
+    
     [self.navigationController pushViewController:infoViewController animated:YES];
 }
 
@@ -76,9 +104,9 @@
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
+/*
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    /*
     int tmpX = thisScrollView.contentOffset.x;
     int conX = (pictureIndex - 1) * pictureWidthInterval;
     if (tmpX == contentOffetX - pictureWidthInterval) 
@@ -103,9 +131,8 @@
         thisScrollView.scrollEnabled = NO;
         [self setViews:currentIndex sourceWith:pictureIndex];
         thisScrollView.scrollEnabled = YES;
-    }*/
+    }
     //NSLog(@"click profile:%d",tmpX);
-    /*
     //user slids the screen to right,so all the views move left
     if ( tmpX == contentOffetX - pictureWidthInterval )
     {
@@ -114,33 +141,33 @@
     else if ( tmpX == contentOffetX + pictureWidthInterval )
     {
         
-    }*/
+    }
 }
-
-- (void)chooseThisImage:(id)sender
+*/
+- (void)chooseThisImage:(UITapGestureRecognizer *)sender
 {
-    NSLog(@"You double click");
+    // if touch the topToolBar already seen, do nothing!
+    if (sender != nil && !beHidden)
+    {
+        double temp = [sender locationInView:thisScrollView].y;
+        if ( temp < 64.0f || temp > 436.0f)
+            return;
+    }
     beHidden = !beHidden;
-    if (beHidden)
-    {
-        toolbar.alpha = 0.0;
-        self.navigationController.navigationBar.alpha = 0.0;
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    }
-    else
-    {
-        toolbar.alpha = showAlpha;
-        self.navigationController.navigationBar.alpha = showAlpha;
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    }
+    [self setIndex];
+    [topToolBar setHidden:beHidden];
+    [buttonGetBack setHidden:beHidden];
+    [profileButton setHidden:beHidden];
+    [showIndex setHidden:beHidden];
+    [lastButton setHidden:beHidden];
+    [nextButton setHidden:beHidden];
+    [loadButton setHidden:beHidden];
+    [toolbar setHidden:beHidden];
+    [[UIApplication sharedApplication] setStatusBarHidden:beHidden];
     
 }
 
 #pragma mark - View lifecycle
-- (void) viewWillDisappear:(BOOL)animated
-{
-    NSLog(@"I have ideas");
-}
 - (void)initAllViews
 {
     for (int i = 1;i <= pictureSum;i ++)
@@ -153,6 +180,7 @@
         [tmpView release];
     }
 }
+/*
 - (void)initSuperViews
 {    
     lastIndex = 0;
@@ -176,10 +204,11 @@
     [nextView release];
     [currentView release];    
 }
+ */
 - (void)initScrollView
 {
     
-    [thisScrollView setFrame:CGRectMake(0, -64, pictureWidth, 524)];
+    [thisScrollView setFrame:CGRectMake(0, -20, pictureWidth, 524)];
     
     [thisScrollView setBackgroundColor:[UIColor blackColor]];
     [thisScrollView setCanCancelContentTouches:NO];
@@ -217,8 +246,8 @@
     picNames = [[NSArray alloc] initWithObjects:@"01dlx-1.jpg",@"01dlx-2.jpg",@"02hc-1.jpg",@"02hc-2.jpg",@"03lx-1.jpg",@"03lx-2.jpg",@"04sml-1.jpg",@"04sml-2.jpg",@"05yy-1.jpg",@"05yy-2.jpg", nil];
     [self initScrollView];
     [self initAllViews];
-    self.navigationItem.rightBarButtonItem = self.profileButton;
-    infoViewController = [InfoViewController alloc];
+    infoViewController = [[InfoViewController alloc] init];
+    [infoViewController firstInit];
     for (int i = 0;i < pictureSum;i ++)
         whetherSaved[i] = false;
      // Do any additional setup after loading the view from its nib.
@@ -228,6 +257,7 @@
     [thisScrollView setContentOffset:CGPointMake( (source - 1) * pictureWidthInterval, 0)];
     contentOffetX = thisScrollView.contentOffset.x;
     pictureIndex = source;
+    [showIndex setText:[NSString stringWithFormat:@"%d/%d",pictureIndex,pictureSum]];    
     [self setViews:currentIndex sourceWith:source];
     if (source - 1 >= 1)
         [self setViews:lastIndex sourceWith:(source - 1)];
@@ -255,6 +285,10 @@
     [nextButton release];
     [infoViewController release];
     [picNames release];
+    [topToolBar release];
+    [buttonGetBack release];
+    [showIndex release];
+    [loadButton release];
     
     [viewArray release];
     // Release any retained subviews of the main view.
@@ -266,6 +300,7 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+/*
 - (void)moveForLast
 {
     pictureIndex --;
@@ -287,12 +322,13 @@
         [self setViews:lastIndex sourceWith:(pictureIndex - 1)];
     if (pictureIndex + 1 <= pictureSum)
         [self setViews:nextIndex sourceWith:(pictureIndex + 1)];    
-}
-- (void)lastPicture:(id)sender
+}*/
+- (IBAction)lastPicture:(id)sender
 {
     if (pictureIndex - 1 < 1)
         return;
     [thisScrollView setContentOffset:CGPointMake(thisScrollView.contentOffset.x - pictureWidthInterval, thisScrollView.contentOffset.y)];
+    [self setIndex];
     if (pictureIndex == 1)
     {
         //set the left button
@@ -302,13 +338,12 @@
         
     }
 }
-- (void)nextPicture:(id)sender
+- (IBAction)nextPicture:(id)sender
 {
     if (pictureIndex + 1 > pictureSum)
         return;
     [thisScrollView setContentOffset:CGPointMake(thisScrollView.contentOffset.x + pictureWidthInterval, thisScrollView.contentOffset.y)];
-    //[self moveForNext];
-    //contentOffetX = thisScrollView.contentOffset.x;
+    [self setIndex];
     if (pictureIndex == pictureSum)
     {
         //set the rightbutton
@@ -320,80 +355,6 @@
 }
 
 @end
-
-#define topBound 10
-#define leftBound 50
-#define profileTopBound 8
-#define profileLeftBound 4
-
-
-@implementation InfoViewController
-@synthesize textView;
-@synthesize profileView;
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    UIImage *bgImage = [UIImage imageNamed:@"profile_back.png"];
-    UIColor *bgColor = [[UIColor alloc] initWithPatternImage:bgImage];
-    [self.view setBackgroundColor:bgColor];
-    
-    
-    //UIImageView *profileBoundView = [[UIImageView alloc] initWithFrame:CGRectMake(topBound, leftBound, 213, 149)];
-    profileView = [[UIImageView alloc] initWithFrame:CGRectMake(leftBound + profileLeftBound, topBound + profileTopBound, 196, 134.5)];
-    
-    [profileView setImage:[UIImage imageNamed:@"段林希.jpg"]];
-    
-    //[profileBoundView setImage:[UIImage imageNamed:@""]];
-    
-    [self.view addSubview:profileView];
-    //[self.view addSubview:profileBoundView];
-    //[profileBoundView release];
-    [profileView release];
-    
-    UIImageView *topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
-    [topImageView setImage:[UIImage imageNamed:@""]];
-    [self.view sendSubviewToBack:topImageView];
-    
-    textView = [[UITextView alloc] initWithFrame:CGRectMake(40, 150, 240, 330)];
-    [textView setEditable:false];
-    //NSStringEncoding;
-    //NSString *textContent;// = [NSString stringWithContentsOfFile:@"testFileReadLines.txt"];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"段林希" ofType:@"txt"];
-    NSURL *url = [[NSURL alloc] initFileURLWithPath:path];
-    if (path == nil)
-        NSLog(@"It is nil");
-    NSString *textContent = [NSString stringWithContentsOfURL:url encoding:NSASCIIStringEncoding error:nil];
-    [url release];
-
-    UILabel *temp = [[UILabel alloc] initWithFrame:CGRectMake(40, 150, 240, 330)] ;
-    [temp setText:textContent];
-    [self.view addSubview:temp];
-    textView.alpha = 0.0;
-    //[textView setText:textContent];
-    [temp setBackgroundColor:bgColor];
-    [temp release];
-    [textView setBackgroundColor:bgColor];
-    [self.view addSubview:textView];
-    
-    
-    [bgColor release];
-    [topImageView release];
-    
-    //textView = [UITextView alloc] initWithFrame:CGRectMake(0, 0, <#CGFloat width#>, <#CGFloat height#>)
-    
-    // Do any additional setup after loading the view from its nib.
-}
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    [textView release];
-    [profileView release];
-}
-@end
-
-
 
 
 

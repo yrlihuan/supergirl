@@ -108,8 +108,9 @@
         [photosNavController release];
     PicturesWallController *firstViewController = [[PicturesWallController alloc] init];
     photosNavController = [[UINavigationController alloc] initWithRootViewController:firstViewController];
-    [photosNavController.view setFrame:CGRectMake(0, -20, 320, 480)]; 
+    [photosNavController.view setFrame:CGRectMake(0, -20, 320, 480)];
     firstViewController.thisFather = self;
+    [photosNavController setNavigationBarHidden:YES];
     //here we must set 460 to size.height since application will add the status bar when the doading view has size of (320 480).
     //it is very strange that this won't happen if loading view's size.height is just not 480.
     

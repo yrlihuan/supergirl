@@ -7,15 +7,17 @@
 //
 
 #import "ScreenViewController.h"
+#define duration 0.5
 
 @implementation ScreenViewController
 
 
-@synthesize  timeReveal,dateReveal,departureButton,lockButton,pictureView;
-@synthesize  thisFather;
+@synthesize timeReveal,dateReveal,departureButton,lockButton,pictureView;
+@synthesize thisFather;
+@synthesize picNames;
 
-const int timerInterval = 1;                    //this is the time interval
-const int pictureAmount = 19;
+const int timerInterval = 4;                    //this is the time interval
+const int pictureAmount = 10;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,13 +44,21 @@ const int pictureAmount = 19;
 - (IBAction)viewLocked:(UIButton *)sender
 {
     lockedFlag = !lockedFlag;
+    if (lockedFlag)
+    {
+        [lockButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"lock.png"]] forState:UIControlStateNormal];
+    }
+    else
+        [lockButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"unlock.png"]] forState:UIControlStateNormal];        
 }
 - (void)startAnimate
 {
+    [self setCalendar];
     departureFlag = true;
     lockedFlag = false;
     pictureIndex = 1;
-    [NSTimer scheduledTimerWithTimeInterval:timerInterval target:self selector:@selector(changePicture) userInfo:nil repeats:NO];
+    secondCount = timerInterval;
+    [self tickTick];
     return;
 }
 
@@ -70,7 +80,7 @@ const int pictureAmount = 19;
     NSInteger minute = dateComponents.minute;
     NSString *dayString = [NSString stringWithFormat: @"%02d",day];
     NSString *monthString = [NSString stringWithFormat: @"%02d",month];
-    NSString *dateString = [NSString stringWithFormat:@"%@ / %@ \n /%d",dayString,monthString,year];
+    NSString *dateString = [NSString stringWithFormat:@"%@/%@/%d",dayString,monthString,year];
     
     NSString *minuteString = [NSString stringWithFormat:  @"%02d",minute];
     NSString *hourString = [NSString stringWithFormat:  @"%02d",hour];
@@ -79,32 +89,68 @@ const int pictureAmount = 19;
     [dateReveal setText:dateString];
     [timeReveal setText:timeString];
 }
-
 - (void)changePicture
 {
-    if (departureFlag == true)
-        [NSTimer scheduledTimerWithTimeInterval:timerInterval target:self selector:@selector(changePicture) userInfo:nil repeats:NO];
-    else
+    /*
+    kCATransitionFade淡出
+    kCATransitionMoveIn覆盖原图
+    kCATransitionPush推出
+    kCATransitionReveal底部显出来
+    setSubtype:也可以有四种类型：
+    kCATransitionFromRight；
+    kCATransitionFromLeft(默认值)
+    kCATransitionFromTop；
+    kCATransitionFromBottom
+     */
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:duration];
+    [animation setTimingFunction:[CAMediaTimingFunction
+                                  functionWithName:kCAMediaTimingFunctionEaseIn]];
+    [animation setType:kCATransitionFade];
+    //[animation setSubtype: kCATransitionFromBottom];
+    [self.pictureView.layer addAnimation:animation forKey:@"Reveal"];
+    
+    
+    NSString *tmpName = [picNames objectAtIndex:pictureIndex-1];
+    UIImage *thisImage = [UIImage imageNamed:tmpName];
+    [pictureView setImage:thisImage];
+    pictureIndex ++;
+    if (pictureIndex > pictureAmount)
+        pictureIndex = 1;
+}
+- (void)tickTick
+{
+    if (departureFlag == false)
         return;
+    
     if (lockedFlag == false)
     {
-        NSString *tmpName = [NSString stringWithFormat:@"%02d.jpg",pictureIndex];
-        UIImage *thisImage = [UIImage imageNamed:tmpName];
-        [pictureView setImage:thisImage];
-        pictureIndex ++;
+        if (secondCount == timerInterval)
+        {            
+            [self changePicture];
+            secondCount = 0;
+        }
+        else
+            secondCount ++;
     }
     int temp = [[NSDate date] timeIntervalSince1970];
-    int countForTimer = 60 / timerInterval;
-    if (temp % countForTimer == 0)
+    if (temp % 60 == 0)
         [self setCalendar];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(tickTick) userInfo:nil repeats:NO];
+}
+- (void)firstInit
+{
+    picNames = [[NSArray alloc] initWithObjects:@"01dlx-1.jpg",@"01dlx-2.jpg",@"02hc-1.jpg",@"02hc-2.jpg",@"03lx-1.jpg",@"03lx-2.jpg",@"04sml-1.jpg",@"04sml-2.jpg",@"05yy-1.jpg",@"05yy-2.jpg", nil];
+    [self.view setFrame:CGRectMake(0, 0, 320, 480)];
+    [pictureView setFrame:CGRectMake(0, 0, 320, 480)];
+    pictureIndex = 1;
+    [self changePicture];
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setCalendar];
-    [self.view setFrame:CGRectMake(0, 0, 320, 480)];
-    [pictureView setFrame:CGRectMake(0, 0, 320, 480)];
     // Do any additional setup after loading the view from its nib.
 }
 
