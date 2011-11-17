@@ -115,7 +115,7 @@
     //it is very strange that this won't happen if loading view's size.height is just not 480.
     
     [self presentModalViewController:photosNavController animated:YES];      
-    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
+    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];
     
     NSLog(@"play succesfull");
 }

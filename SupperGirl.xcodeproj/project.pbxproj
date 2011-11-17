@@ -134,6 +134,10 @@
 		A9E91825146B743400E5D3E3 /* voice_back.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E91824146B743400E5D3E3 /* voice_back.png */; };
 		A9F9EC3C14554EFA00603ABC /* pause3.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F9EC3B14554EFA00603ABC /* pause3.png */; };
 		A9FB14CE1470C17C0079C10E /* music_playing.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A9FB14CD1470C17C0079C10E /* music_playing.jpg */; };
+		F24BF6F714752B5E0025DB92 /* VoiceReplyController.m in Sources */ = {isa = PBXBuildFile; fileRef = F24BF6F514752B5E0025DB92 /* VoiceReplyController.m */; };
+		F24BF6F814752B5E0025DB92 /* VoiceReplyController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F24BF6F614752B5E0025DB92 /* VoiceReplyController.xib */; };
+		F24BF6FD14752BFE0025DB92 /* VoiceInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = F24BF6FB14752BFD0025DB92 /* VoiceInputController.m */; };
+		F24BF6FE14752BFE0025DB92 /* VoiceInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F24BF6FC14752BFE0025DB92 /* VoiceInputController.xib */; };
 		F26D5E61147123B400F83F88 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F26D5E5F147123B400F83F88 /* InfoViewController.m */; };
 		F26D5E62147123B400F83F88 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F26D5E60147123B400F83F88 /* InfoViewController.xib */; };
 		F26D5E65147126F800F83F88 /* profile_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F26D5E64147126F800F83F88 /* profile_back.jpg */; };
@@ -329,6 +333,12 @@
 		A9E91824146B743400E5D3E3 /* voice_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_back.png; sourceTree = "<group>"; };
 		A9F9EC3B14554EFA00603ABC /* pause3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause3.png; path = ../pause3.png; sourceTree = "<group>"; };
 		A9FB14CD1470C17C0079C10E /* music_playing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music_playing.jpg; sourceTree = SOURCE_ROOT; };
+		F24BF6F414752B5E0025DB92 /* VoiceReplyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceReplyController.h; sourceTree = "<group>"; };
+		F24BF6F514752B5E0025DB92 /* VoiceReplyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceReplyController.m; sourceTree = "<group>"; };
+		F24BF6F614752B5E0025DB92 /* VoiceReplyController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoiceReplyController.xib; sourceTree = "<group>"; };
+		F24BF6FA14752BFD0025DB92 /* VoiceInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceInputController.h; sourceTree = "<group>"; };
+		F24BF6FB14752BFD0025DB92 /* VoiceInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceInputController.m; sourceTree = "<group>"; };
+		F24BF6FC14752BFE0025DB92 /* VoiceInputController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoiceInputController.xib; sourceTree = "<group>"; };
 		F26D5E5E147123B400F83F88 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		F26D5E5F147123B400F83F88 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		F26D5E60147123B400F83F88 /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
@@ -406,6 +416,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F24BF6FA14752BFD0025DB92 /* VoiceInputController.h */,
+				F24BF6FB14752BFD0025DB92 /* VoiceInputController.m */,
+				F24BF6FC14752BFE0025DB92 /* VoiceInputController.xib */,
+				F24BF6F414752B5E0025DB92 /* VoiceReplyController.h */,
+				F24BF6F514752B5E0025DB92 /* VoiceReplyController.m */,
+				F24BF6F614752B5E0025DB92 /* VoiceReplyController.xib */,
 				F768E61D0E7852ED00715E09 /* AudioViews */,
 				A974704E146CE2810056F22C /* JSON */,
 				1D3623240D0F684500981E51 /* avTouchAppDelegate.h */,
@@ -903,6 +919,8 @@
 				F2824F7C14721C60006070B6 /* lock.png in Resources */,
 				F2824F7D14721C60006070B6 /* unlock.png in Resources */,
 				03FEBF881470FE6400E3E823 /* MainWindow.xib in Resources */,
+				F24BF6F814752B5E0025DB92 /* VoiceReplyController.xib in Resources */,
+				F24BF6FE14752BFE0025DB92 /* VoiceInputController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,6 +954,8 @@
 				A936A06D146E85710006E96C /* PictureViewController.m in Sources */,
 				A936A06F146E85710006E96C /* ScreenViewController.m in Sources */,
 				F26D5E61147123B400F83F88 /* InfoViewController.m in Sources */,
+				F24BF6F714752B5E0025DB92 /* VoiceReplyController.m in Sources */,
+				F24BF6FD14752BFE0025DB92 /* VoiceInputController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

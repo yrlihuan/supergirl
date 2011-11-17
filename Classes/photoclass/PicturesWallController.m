@@ -78,8 +78,6 @@ double picturesWallSize;
     [self.view addSubview:picturesWall];
     [self.view sendSubviewToBack:picturesWall];
     
-    self.navigationController.navigationBar.alpha = showAlpha;
-    
     screenViewController.thisFather = self;
 }
 #pragma mark - View lifecycle
@@ -90,6 +88,8 @@ double picturesWallSize;
     [self.view sendSubviewToBack:topToolBar];
     [self initPicturesWall];
     [screenViewController firstInit];
+    
+    [buttonGetBack setImage:[UIImage imageNamed:@"back_hover.jpg"] forState:UIControlStateSelected];
     // Do any additional setup after loading the view from its nib.
 }
 - (void)initSubview
@@ -189,7 +189,7 @@ double picturesWallSize;
     [alert release];
      */
     [self.navigationController pushViewController:pictureViewController animated:YES];
-    [pictureViewController startView:((TapGestureRecognizer *)sender).imageIndex];
+    [pictureViewController startFor:((TapGestureRecognizer *)sender).imageIndex];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
