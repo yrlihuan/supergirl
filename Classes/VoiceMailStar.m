@@ -237,7 +237,7 @@
     //headimage.image=image;
     //cell.imageView.image = image;
     //[cell.contentView addSubview:headimage];
-    UIButton * voiceplaybt=[[UIButton alloc] initWithFrame:CGRectMake(25, 40, 20 , 20)];
+    UIButton * voiceplaybt=[[UIButton alloc] initWithFrame:CGRectMake(25, 34, 20 , 20)];
     [voiceplaybt setImage:image forState:UIControlStateNormal];
     //[voiceplaybt setImage:imageselected forState:UIControlEventTouchDown];
     voiceplaybt.tag=row;

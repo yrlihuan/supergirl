@@ -9,6 +9,7 @@
 #import "VoiceMailController.h"
 @implementation VoiceMailController
 @synthesize listData;
+@synthesize controller;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -102,8 +103,9 @@
     
    // NSLog(@"name:%@",[listData objectAtIndex:0]);
 }
-- (void)deallo
+- (void)dealloc
 {
+    [controller dealloc];
     [super dealloc];
 }
 
@@ -169,7 +171,7 @@
     NSUInteger row = [indexPath row];
     NSString *blank=@"            ";
         
-        UIImage *image = [UIImage imageNamed:@"music_photo.png"];
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-1.png",[listData objectAtIndex:(2*row)]]];
         UIImageView *headimage=[[UIImageView alloc] init];
         headimage.frame=CGRectMake(15, 7, 65, 65);
         headimage.image=image;
@@ -183,8 +185,8 @@
         [cellview addSubview:cellback];
         cell.backgroundView=cellview;
         //cell.detailTextLabel.text=@"            %@";
-        cell.detailTextLabel.text=[blank stringByAppendingFormat:@"%@",[listData objectAtIndex:(2*row+1)]];
-        cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:15];
+        cell.detailTextLabel.text=[blank stringByAppendingFormat:@"    %@",[listData objectAtIndex:(2*row+1)]];
+        cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
     
     cell.textLabel.text = [blank stringByAppendingString:[listData objectAtIndex:(2*row)]];
     //cell.textLabel.center=CGPointMake(300, 40);
@@ -220,6 +222,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	//[self updateSong];
   //  musictable.hidden=((int)(1+musictable.hidden))%2;
     VoiceMailStar* voicestar=[[VoiceMailStar alloc] init];
+    [controller pausePlaybackForPlayer:controller.player];
     [voicestar getstarid:(int)(row+1)];
     voicestar.starname=[listData objectAtIndex:(2*row)];
     [self presentModalViewController:voicestar animated:YES];

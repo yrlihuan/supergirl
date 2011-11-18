@@ -13,6 +13,7 @@
 @synthesize movieplayer;
 @synthesize listdata;
 @synthesize mainviewcontroller;
+@synthesize controller;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -25,6 +26,10 @@
 - (void)dealloc
 {
     [super dealloc];
+    [listdata release];
+   [movieplayer release];
+   [mainviewcontroller release];
+    [controller release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +46,7 @@
 {
     [super viewDidLoad];
     NSLog(@"view didload");
-    listdata = [[NSArray alloc] initWithObjects:@"MovieList", @"test",@"test2", nil];
+    listdata = [[NSArray alloc] initWithObjects:@"段林希", @"洪辰",@"刘忻",@"苏妙玲",@"巡演", nil];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -101,6 +106,7 @@
 
 -(void)movieplay:(NSUInteger)movieplaying
 { 
+    [controller pausePlaybackForPlayer:controller.player];
     //[[UIApplication sharedApplication] setStatusBarHidden:YES]; 
     //[[UIApplication sharedApplication] setStatusBarOrientation:[[UIDevice currentDevice] orientation] animated:NO];
     //NSString *path = [[NSBundle mainBundle] pathForResource:@"Movie-1" ofType:@"mp4" inDirectory:nil]; 
@@ -171,18 +177,13 @@
 	
     
     NSUInteger row = [indexPath row];
-    if (row>0) {
+    
         
-        UIImage *image = [UIImage imageNamed:@"music_photo.png"];
+        UIImage *image = [UIImage imageNamed:[[listdata objectAtIndex:row] stringByAppendingString:@"m.jpg"]];
         cell.imageView.image = image;
-    }
+    
     cell.textLabel.text = [listdata objectAtIndex:row];
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
-	
-	if (row < 7)
-        cell.detailTextLabel.text = @"Mr. Disney";
-    else
-        cell.detailTextLabel.text = @"Mr. Tolkien";
 	
     return cell;
 }
@@ -201,8 +202,6 @@ indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
  willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"will select");
     NSUInteger row = [indexPath row];
-    if (row == 0)
-        return nil;
 	
     return indexPath;
 }

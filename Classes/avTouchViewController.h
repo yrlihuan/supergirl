@@ -67,13 +67,20 @@
     AVAudioPlayer						*player;
     UINavigationController* photosNavController;
     LightViewController *lightViewController;
+    IBOutlet UIButton    *moviebt;
+    IBOutlet UIButton    *musicbt;
+    IBOutlet UIButton    *photobt;
+    IBOutlet UIButton    *cheerbt;
+    IBOutlet UIButton    *voicebt;
 }
 @property (nonatomic,retain) MPMoviePlayerViewController *movieplayer;
 @property (nonatomic ,retain) NSArray *array;
 @property (nonatomic,retain) 	AVAudioPlayer						*player;
-- (IBAction)movielist:(UIButton*)sender;
+-(IBAction)movielist:(UIButton*)sender;
 -(IBAction)photolist:(UIButton*)sender;
 -(IBAction)voicelist:(UIButton*)sender;
 -(IBAction)cheerlist:(UIButton*)sender;
+-(IBAction)musiclist:(UIButton*)sender;
+-(IBAction)movielisthiden:(UIButton*)sender;
 @end
 

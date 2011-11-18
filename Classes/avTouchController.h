@@ -17,6 +17,7 @@
     IBOutlet UIProgressView             *progresstime;
 	IBOutlet UILabel					*currentTime;
 	IBOutlet UILabel					*duration;
+    IBOutlet UILabel                    *starname;
     IBOutlet UITableView                *musictable;
 	IBOutlet CALevelMeter				*lvlMeter_in;
     IBOutlet UIView                     *movieview;
@@ -30,9 +31,10 @@
 	UIImage								*pauseBtnBG;
     UIImage								*musicplayBtnBG;
     UIImage								*musicpauseBtnBG;
-    IBOutlet  UIImageView                         *cdimage;
-    IBOutlet UIView                              *cdview;
-    IBOutlet UIView *Textview;
+    IBOutlet UIImageView               *cdimage;
+    IBOutlet UIView                     *cdview;
+    IBOutlet UIImageView                *cdcover;
+    IBOutlet UIView                     *Textview;
     //cnvUILabel                 *lycview;
     UITextView *  lycview;
     UITextView *  lycshowing;
@@ -60,14 +62,14 @@
 - (IBAction)musiclist:(UIButton*)sender;
 - (IBAction)lyclist:(UIButton*)sender;
 //- (IBAction)recorderlist:(UIButton*)sender;
-
+-(IBAction)musiclisthiden:(UIButton*)sender;
 
 - (void)registerForBackgroundNotifications;
 - (void)updateViewForPlayerInfo:(AVAudioPlayer*)p;
 - (void)startPlaybackForPlayer:(AVAudioPlayer*)p;
 - (void)updateViewForPlayerState:(AVAudioPlayer *)p;
 - (void)lycshow;
-
+-(void)pausePlaybackForPlayer:(AVAudioPlayer*)p;
 
 @property (nonatomic, retain)	UILabel			*fileName;
 @property (nonatomic, retain)	UIButton		*playButton;
