@@ -48,7 +48,7 @@
 					<object class="IBUIImageView" id="774825345">
 						<reference key="NSNextResponder" ref="272008686"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 44}</string>
+						<string key="NSFrameSize">{320, 49}</string>
 						<reference key="NSSuperview" ref="272008686"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="402570376"/>
@@ -63,7 +63,7 @@
 					<object class="IBUILabel" id="336149682">
 						<reference key="NSNextResponder" ref="272008686"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{139, 10}, {42, 24}}</string>
+						<string key="NSFrame">{{135, 10}, {50, 26}}</string>
 						<reference key="NSSuperview" ref="272008686"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="223931926"/>
@@ -75,8 +75,8 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">相册</string>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Symbol</string>
-							<double key="NSSize">17</double>
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">14</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<object class="NSColor" key="IBUITextColor">
@@ -91,7 +91,7 @@
 					<object class="IBUIButton" id="402570376">
 						<reference key="NSNextResponder" ref="272008686"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{5, 10}, {50, 24}}</string>
+						<string key="NSFrame">{{5, 10}, {56, 26}}</string>
 						<reference key="NSSuperview" ref="272008686"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="336149682"/>
@@ -100,9 +100,9 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont" id="802760252">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">13</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<string key="IBUINormalTitle">  返回</string>
@@ -126,15 +126,20 @@
 					<object class="IBUIButton" id="223931926">
 						<reference key="NSNextResponder" ref="272008686"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{275, 10}, {40, 24}}</string>
+						<string key="NSFrame">{{270, 10}, {43, 26}}</string>
 						<reference key="NSSuperview" ref="272008686"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:222</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIFont" ref="802760252"/>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">15</double>
+							<int key="NSfFlags">16</int>
+						</object>
 						<double key="IBUIContentEdgeInsets.top">4</double>
 						<double key="IBUIContentEdgeInsets.bottom">4</double>
 						<double key="IBUIContentEdgeInsets.left">12</double>
@@ -528,9 +533,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>clickSreenButton:</string>
 							<string>toGetBack:</string>
+							<string>touchDown:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -541,6 +548,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>clickSreenButton:</string>
 							<string>toGetBack:</string>
+							<string>touchDown:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -550,6 +558,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">toGetBack:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">touchDown:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

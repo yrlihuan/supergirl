@@ -45,6 +45,7 @@
 }
 - (void)setContent
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     [girlName setText:[self getName:true]];    
     UIImage *profileImage = [UIImage imageNamed:[NSString stringWithFormat:@"Profile%@.jpg",[self getName:false]]];
     if (profileImage == nil)
@@ -61,8 +62,10 @@
 }
 - (void)firstInit
 {
-    textView = [[UITextView alloc] initWithFrame:CGRectMake(40, 240, 240, 220)];
+    textView = [[UITextView alloc] initWithFrame:CGRectMake(40, 225, 240, 235)];
     [textView setEditable:false];
+
+    //[textView setFont:font];
     
     UIColor *tempColor = [[UIColor alloc] initWithWhite:0.0 alpha:0.0];    
     [textView setBackgroundColor:tempColor];
@@ -90,6 +93,7 @@
 }
 - (IBAction)toGetBack:(UIButton *)sender
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     [self.navigationController popViewControllerAnimated:YES];
     return;
 }

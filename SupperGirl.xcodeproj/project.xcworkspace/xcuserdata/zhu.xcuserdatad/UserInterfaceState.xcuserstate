@@ -18108,7 +18108,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>343287593.64662099</real>
+		<real>343288349.60649401</real>
 		<string>{21349, 937}</string>
 		<string>{21659, 0}</string>
 		<dict>
@@ -22670,7 +22670,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>343287593.65120298</real>
+		<real>343288349.61134601</real>
 		<string>{21349, 937}</string>
 		<string>{21659, 0}</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
@@ -22971,7 +22971,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1767</integer>
+					<integer>1762</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -23061,7 +23061,7 @@
 		<string>IDESCMStatusFilteringEnabled</string>
 		<string>IDESelectedObjects</string>
 		<string>IDEExpandedItemsSet</string>
-		<string>{{0, 0}, {234, 579}}</string>
+		<string>{{0, 183}, {234, 579}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
