@@ -93,7 +93,7 @@
 }
 - (IBAction)toGetBack:(UIButton *)sender
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
     [self.navigationController popViewControllerAnimated:YES];
     return;
 }

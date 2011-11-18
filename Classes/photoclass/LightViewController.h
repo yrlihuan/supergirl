@@ -19,6 +19,7 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *thisScrollView;
 @property (nonatomic, retain) IBOutlet UIImageView *topToolBar;
 @property (nonatomic, retain) IBOutlet UIButton *buttonGetBack;
+@property (nonatomic, retain) IBOutlet UILabel *thisTittle;
 
 
 - (void)chooseThisImage:(id)sender;

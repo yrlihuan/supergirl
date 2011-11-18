@@ -57,36 +57,8 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">top_alpha.png</string>
+							<string key="NSResourceName">topbar_back.png</string>
 						</object>
-					</object>
-					<object class="IBUILabel" id="336149682">
-						<reference key="NSNextResponder" ref="272008686"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{135, 10}, {50, 26}}</string>
-						<reference key="NSSuperview" ref="272008686"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="223931926"/>
-						<string key="NSReuseIdentifierKey">_NS:311</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">相册</string>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">14</double>
-							<int key="NSfFlags">16</int>
-						</object>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDEAA</bytes>
-						</object>
-						<nil key="IBUIHighlightedColor"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIButton" id="402570376">
 						<reference key="NSNextResponder" ref="272008686"/>
@@ -105,6 +77,7 @@
 							<double key="NSSize">13</double>
 							<int key="NSfFlags">16</int>
 						</object>
+						<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 						<string key="IBUINormalTitle">  返回</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="839213209">
 							<int key="NSColorSpace">3</int>
@@ -114,14 +87,38 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
 						</object>
-						<object class="NSColor" key="IBUINormalTitleShadowColor" id="415341974">
+						<object class="NSColor" key="IBUINormalTitleShadowColor" id="849532124">
 							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC41AA</bytes>
+							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">back_hover.png</string>
+							<string key="NSResourceName">back.png</string>
 						</object>
+					</object>
+					<object class="IBUILabel" id="336149682">
+						<reference key="NSNextResponder" ref="272008686"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{135, 10}, {50, 26}}</string>
+						<reference key="NSSuperview" ref="272008686"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="223931926"/>
+						<string key="NSReuseIdentifierKey">_NS:311</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">相册</string>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">14</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIButton" id="223931926">
 						<reference key="NSNextResponder" ref="272008686"/>
@@ -140,16 +137,17 @@
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
+						<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 						<double key="IBUIContentEdgeInsets.top">4</double>
 						<double key="IBUIContentEdgeInsets.bottom">4</double>
-						<double key="IBUIContentEdgeInsets.left">12</double>
-						<double key="IBUIContentEdgeInsets.right">12</double>
+						<double key="IBUIContentEdgeInsets.left">13</double>
+						<double key="IBUIContentEdgeInsets.right">13</double>
 						<reference key="IBUIHighlightedTitleColor" ref="839213209"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="415341974"/>
+						<reference key="IBUINormalTitleShadowColor" ref="849532124"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">screensaver.png</string>
@@ -533,11 +531,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>clickSreenButton:</string>
 							<string>toGetBack:</string>
-							<string>touchDown:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -548,7 +544,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>clickSreenButton:</string>
 							<string>toGetBack:</string>
-							<string>touchDown:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -558,10 +553,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">toGetBack:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">touchDown:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -731,17 +722,17 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>back_hover.png</string>
+				<string>back.png</string>
 				<string>screensaver.png</string>
-				<string>top_alpha.png</string>
 				<string>top_btn.png</string>
+				<string>topbar_back.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{111, 52}</string>
 				<string>{26, 28}</string>
-				<string>{640, 97}</string>
 				<string>{86, 51}</string>
+				<string>{480, 111}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">534</string>

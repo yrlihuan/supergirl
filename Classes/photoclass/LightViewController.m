@@ -14,6 +14,7 @@
 @synthesize thisFather;
 @synthesize topToolBar;
 @synthesize buttonGetBack;
+@synthesize thisTittle;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if (scrollView == thisScrollView && beHidden == false)
@@ -85,12 +86,14 @@
     {
         [topToolBar setHidden:YES];
         [buttonGetBack setHidden:YES];
+        [thisTittle setHidden:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
     }
     else
     {
         [buttonGetBack setHidden:NO];
         [topToolBar setHidden:NO];
+        [thisTittle setHidden:NO];
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
     }
     

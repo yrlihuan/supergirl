@@ -92,7 +92,7 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"the offset:%f",thisScrollView.contentOffset.x);
+    //NSLog(@"the offset:%f",thisScrollView.contentOffset.x);
     int offsetX = thisScrollView.contentOffset.x/VIEWWIDTH + 1;
     
     if (offsetX == pictureIndex)
@@ -119,11 +119,17 @@
     }
     else
         NSLog(@"worng");
-    NSLog(@"pictureIndex :%d",offsetX);
+    //NSLog(@"pictureIndex :%d",offsetX);
     [self launchFor:offsetX];
 }
 - (void)zoomThisImage:(UITapGestureRecognizer *)sender
 {
+    if (sender != nil && !beHidden)
+    {
+        double temp = [sender locationInView:thisScrollView].y;
+        if ( temp < 64.0f || temp > 436.0f)
+            return;
+    }
     if (!beHidden)
         [self chooseThisImage:nil];
     CellImageView *temp = [viewArray objectAtIndex:currentView];
@@ -134,6 +140,8 @@
 }
 - (void)chooseThisImage:(UITapGestureRecognizer *)sender
 {
+    if (inZooming)
+        return;
     if (sender != nil && !beHidden)
     {
         double temp = [sender locationInView:thisScrollView].y;
@@ -204,6 +212,7 @@
 {
     [self launchFor:index];
     [thisScrollView setContentOffset:CGPointMake(VIEWWIDTH*(index-1), 0)];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 }
 - (void)launchFor:(int)index
 {
@@ -231,13 +240,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    inZooming = false;
     beHidden = false;
     for (int i = 0;i < PICTURESNUMBER;i ++)
         whetherSaved[i] = false;
     currentView = -1;
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
     [self initScrollViews];
     [self.view sendSubviewToBack:thisScrollView];
+    
+    infoViewController = [[InfoViewController alloc] init];
+    [infoViewController firstInit];
     // Do any additional setup after loading the view from its nib.
 }
 - (void)setViewsAlpha:(bool)alpha
@@ -252,6 +264,8 @@
 - (UIView *)viewForZoomingInScrollView:(UIScrollView*)scrollView
 {
     [self setViewsAlpha:YES];
+    if (!beHidden)
+        [self chooseThisImage:nil];
     return ((CellImageView *)[viewArray objectAtIndex:currentView]).coreView;
 }
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale
@@ -259,11 +273,15 @@
     CellImageView *temp = [viewArray objectAtIndex:currentView];
     if (scale > 1)
     {
+        inZooming = true;
         thisScrollView.scrollEnabled = NO;
         temp.scrollEnabled = YES;
     }
     else
     {
+        inZooming = false;
+        if (beHidden)
+            [self chooseThisImage:nil];
         thisScrollView.scrollEnabled = YES;
         temp.scrollEnabled = NO;
         [self setViewsAlpha:NO];
@@ -299,17 +317,26 @@
 - (void)savePhoto
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    CellImageView *temp = [viewArray objectAtIndex:currentView];
-    
+    CellImageView *temp = [viewArray objectAtIndex:currentView];    
     UIImageWriteToSavedPhotosAlbum(temp.coreView.image, nil,nil,nil);
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"SavePhoto" message:@"This photo has been saved to photo album" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-    
     [pool release];
 }
 
-
+- (void) dimissAlert:(UIAlertView *)alert
+{
+    if (alert)
+    {
+        [alert dismissWithClickedButtonIndex:[alert cancelButtonIndex] animated:YES];
+        //[alert dismissWithClickedButtonIndex:[alert cancelButtonIndex] animated:YES];
+        [alert release];
+    }
+}
+- (void)showAlert
+{            
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示\n" message:@"图片已保存到手机相册中" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+    [alert show];
+    [self performSelector:@selector(dimissAlert:) withObject:alert afterDelay:1];
+}
 
 - (IBAction)lastPicture:(id)sender
 {
@@ -333,17 +360,20 @@
 - (IBAction)toGetBack:(UIButton *)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 }
 - (IBAction)downLoad:(UIButton *)sender
 {
     if (whetherSaved[pictureIndex - 1] == true)
     {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"SavePhoto" message:@"This photo has been save to photo album" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
+        [self showAlert];
     }
     else
+    {
+        whetherSaved[pictureIndex-1] = true;
         [NSThread detachNewThreadSelector:@selector(savePhoto) toTarget:self withObject:nil];
+        [self showAlert];    
+    }
 }
 
 

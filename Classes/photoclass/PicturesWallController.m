@@ -34,7 +34,10 @@ double picturesWallSize;
     return;
 }
 
-
+- (IBAction)touchBack:(id)sender
+{
+    [buttonGetBack setImage:[UIImage imageNamed:@"back_hover.jpg"] forState:UIControlStateHighlighted];
+}
 - (IBAction)clickSreenButton:(id)sender
 {
     if (screenViewController == nil)
@@ -46,7 +49,7 @@ double picturesWallSize;
 - (IBAction)toGetBack:(id)sender
 {
     [thisFather dismissModalViewControllerAnimated:YES];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault]; 
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault]; 
     [NSTimer timerWithTimeInterval:0.1 target:thisFather selector:@selector(clearPhoto) userInfo:nil repeats:NO];
 }
 
@@ -88,14 +91,22 @@ double picturesWallSize;
     [self.view sendSubviewToBack:topToolBar];
     [self initPicturesWall];
     [screenViewController firstInit];
+    //[buttonGetBack setBackgroundImage:[UIImage imageNamed:@"back_hover.jpg"] forState:UIControlStateHighlighted];
+    //[showScreen setBackgroundImage:[UIImage imageNamed:@"top_btn_hover.jpg"] forState:UIControlStateHighlighted];
     
-    [buttonGetBack setImage:[UIImage imageNamed:@"back_hover.jpg"] forState:UIControlStateSelected];
+    
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.jpg"]];
+    [image setFrame:CGRectMake(0, -20, 320, 480)];
+    [self.view addSubview:image];
+    [self.view sendSubviewToBack:image];
+    
     // Do any additional setup after loading the view from its nib.
 }
 - (void)initSubview
 {    
     [picturesWall setBackgroundColor:[UIColor blackColor]];
     [picturesWall setCanCancelContentTouches:NO];
+    [picturesWall setBackgroundColor:[UIColor clearColor]];
     picturesWall.indicatorStyle = UIScrollViewIndicatorStyleBlack;
     picturesWall.clipsToBounds = NO;
     picturesWall.scrollEnabled = YES;

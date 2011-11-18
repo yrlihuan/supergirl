@@ -88,7 +88,6 @@
 						<string key="NSFrame">{{0, 400}, {190, 60}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:311</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -119,6 +118,7 @@
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
+						<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 						<double key="IBUIContentEdgeInsets.top">-1</double>
 						<double key="IBUIContentEdgeInsets.bottom">-1</double>
 						<double key="IBUIContentEdgeInsets.left">-1</double>
@@ -150,6 +150,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="740080777"/>
+						<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 						<double key="IBUIContentEdgeInsets.top">13</double>
 						<double key="IBUIContentEdgeInsets.bottom">13</double>
 						<double key="IBUIContentEdgeInsets.left">13</double>

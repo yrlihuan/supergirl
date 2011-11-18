@@ -18,8 +18,8 @@
 
 
 @interface CellImageView : UIScrollView
-@property (nonatomic,retain) UIImageView *coreView;
-@property (nonatomic,retain) NSArray *picNames;
+@property (retain) UIImageView *coreView;
+@property (retain) NSArray *picNames;
 - (int)getIndex;
 - (void)basicInit;
 - (void)drawSelf:(int)index;
@@ -32,11 +32,12 @@
     int currentView;
     bool beHidden;
     bool whetherSaved[PICTURESNUMBER];
+    bool inZooming;
 }
 
 @property (nonatomic,retain) IBOutlet UIScrollView *thisScrollView;
 
-@property (nonatomic, retain) NSArray *viewArray;
+@property (retain) NSArray *viewArray;
 @property (nonatomic,retain) IBOutlet UIImageView *toolbar;
 @property (nonatomic,retain) IBOutlet UIButton *profileButton;
 @property (nonatomic,retain) IBOutlet UIButton *loadButton,*lastButton,*nextButton;
@@ -57,4 +58,5 @@
 - (void)setViewsAlpha:(bool)alpha;
 - (void)chooseThisImage:(UITapGestureRecognizer *)sender;
 - (void)savePhoto;
+- (void)showAlert;
 @end

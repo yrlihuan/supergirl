@@ -47,7 +47,6 @@
 		A936A05B146E85710006E96C /* 02hc-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A936A02B146E85710006E96C /* 02hc-1.jpg */; };
 		A936A05C146E85710006E96C /* 02hc-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A936A02C146E85710006E96C /* 02hc-2.jpg */; };
 		A936A05D146E85710006E96C /* 02洪辰-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A936A02D146E85710006E96C /* 02洪辰-1.jpg */; };
-		A936A05E146E85710006E96C /* 02洪辰-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A936A02E146E85710006E96C /* 02洪辰-2.jpg */; };
 		A936A05F146E85710006E96C /* 03lx-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A936A02F146E85710006E96C /* 03lx-1.jpg */; };
 		A936A060146E85710006E96C /* 03lx-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A936A030146E85710006E96C /* 03lx-2.jpg */; };
 		A936A061146E85710006E96C /* 03刘忻-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A936A031146E85710006E96C /* 03刘忻-1.jpg */; };
@@ -134,6 +133,7 @@
 		A9E91825146B743400E5D3E3 /* voice_back.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E91824146B743400E5D3E3 /* voice_back.png */; };
 		A9F9EC3C14554EFA00603ABC /* pause3.png in Resources */ = {isa = PBXBuildFile; fileRef = A9F9EC3B14554EFA00603ABC /* pause3.png */; };
 		A9FB14CE1470C17C0079C10E /* music_playing.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A9FB14CD1470C17C0079C10E /* music_playing.jpg */; };
+		F23334FE1476287900216536 /* 02洪辰-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F23334FD1476287900216536 /* 02洪辰-2.jpg */; };
 		F24BF6F714752B5E0025DB92 /* VoiceReplyController.m in Sources */ = {isa = PBXBuildFile; fileRef = F24BF6F514752B5E0025DB92 /* VoiceReplyController.m */; };
 		F24BF6F814752B5E0025DB92 /* VoiceReplyController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F24BF6F614752B5E0025DB92 /* VoiceReplyController.xib */; };
 		F24BF6FD14752BFE0025DB92 /* VoiceInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = F24BF6FB14752BFD0025DB92 /* VoiceInputController.m */; };
@@ -147,6 +147,7 @@
 		F26D5E6F1471303700F83F88 /* ProfileDuanLinXi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F26D5E6A1471303700F83F88 /* ProfileDuanLinXi.jpg */; };
 		F26D5E701471303700F83F88 /* ProfileHongChen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F26D5E6B1471303700F83F88 /* ProfileHongChen.jpg */; };
 		F26D5E711471303700F83F88 /* ProfileSuMiaoLing.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F26D5E6C1471303700F83F88 /* ProfileSuMiaoLing.jpg */; };
+		F2821A12147619EA00EFA83A /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F2821A11147619EA00EFA83A /* bg.jpg */; };
 		F2824F711472085F006070B6 /* Info_DuanLinXi.txt in Resources */ = {isa = PBXBuildFile; fileRef = F2824F6C1472085E006070B6 /* Info_DuanLinXi.txt */; };
 		F2824F721472085F006070B6 /* Info_HongChen.txt in Resources */ = {isa = PBXBuildFile; fileRef = F2824F6D1472085E006070B6 /* Info_HongChen.txt */; };
 		F2824F731472085F006070B6 /* Info_LiuXin.txt in Resources */ = {isa = PBXBuildFile; fileRef = F2824F6E1472085F006070B6 /* Info_LiuXin.txt */; };
@@ -232,7 +233,6 @@
 		A936A02B146E85710006E96C /* 02hc-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "02hc-1.jpg"; sourceTree = "<group>"; };
 		A936A02C146E85710006E96C /* 02hc-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "02hc-2.jpg"; sourceTree = "<group>"; };
 		A936A02D146E85710006E96C /* 02洪辰-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "02洪辰-1.jpg"; sourceTree = "<group>"; };
-		A936A02E146E85710006E96C /* 02洪辰-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "02洪辰-2.jpg"; sourceTree = "<group>"; };
 		A936A02F146E85710006E96C /* 03lx-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "03lx-1.jpg"; sourceTree = "<group>"; };
 		A936A030146E85710006E96C /* 03lx-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "03lx-2.jpg"; sourceTree = "<group>"; };
 		A936A031146E85710006E96C /* 03刘忻-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "03刘忻-1.jpg"; sourceTree = "<group>"; };
@@ -333,6 +333,7 @@
 		A9E91824146B743400E5D3E3 /* voice_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_back.png; sourceTree = "<group>"; };
 		A9F9EC3B14554EFA00603ABC /* pause3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause3.png; path = ../pause3.png; sourceTree = "<group>"; };
 		A9FB14CD1470C17C0079C10E /* music_playing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music_playing.jpg; sourceTree = SOURCE_ROOT; };
+		F23334FD1476287900216536 /* 02洪辰-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "02洪辰-2.jpg"; sourceTree = "<group>"; };
 		F24BF6F414752B5E0025DB92 /* VoiceReplyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceReplyController.h; sourceTree = "<group>"; };
 		F24BF6F514752B5E0025DB92 /* VoiceReplyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceReplyController.m; sourceTree = "<group>"; };
 		F24BF6F614752B5E0025DB92 /* VoiceReplyController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoiceReplyController.xib; sourceTree = "<group>"; };
@@ -349,6 +350,7 @@
 		F26D5E6A1471303700F83F88 /* ProfileDuanLinXi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ProfileDuanLinXi.jpg; sourceTree = "<group>"; };
 		F26D5E6B1471303700F83F88 /* ProfileHongChen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ProfileHongChen.jpg; sourceTree = "<group>"; };
 		F26D5E6C1471303700F83F88 /* ProfileSuMiaoLing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ProfileSuMiaoLing.jpg; sourceTree = "<group>"; };
+		F2821A11147619EA00EFA83A /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		F2824F6C1472085E006070B6 /* Info_DuanLinXi.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info_DuanLinXi.txt; sourceTree = "<group>"; };
 		F2824F6D1472085E006070B6 /* Info_HongChen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info_HongChen.txt; sourceTree = "<group>"; };
 		F2824F6E1472085F006070B6 /* Info_LiuXin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info_LiuXin.txt; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 		A936A026146E85710006E96C /* Photo_Slicing */ = {
 			isa = PBXGroup;
 			children = (
+				F23334FD1476287900216536 /* 02洪辰-2.jpg */,
 				F2824F6C1472085E006070B6 /* Info_DuanLinXi.txt */,
 				F2824F6D1472085E006070B6 /* Info_HongChen.txt */,
 				F2824F6E1472085F006070B6 /* Info_LiuXin.txt */,
@@ -576,7 +579,6 @@
 				A936A02B146E85710006E96C /* 02hc-1.jpg */,
 				A936A02C146E85710006E96C /* 02hc-2.jpg */,
 				A936A02D146E85710006E96C /* 02洪辰-1.jpg */,
-				A936A02E146E85710006E96C /* 02洪辰-2.jpg */,
 				A936A02F146E85710006E96C /* 03lx-1.jpg */,
 				A936A030146E85710006E96C /* 03lx-2.jpg */,
 				A936A031146E85710006E96C /* 03刘忻-1.jpg */,
@@ -651,6 +653,7 @@
 		F775553A0E77272200A99FCA /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F2821A11147619EA00EFA83A /* bg.jpg */,
 				F2824F7A14721C60006070B6 /* lock.png */,
 				F2824F7B14721C60006070B6 /* unlock.png */,
 				F26D5E66147127D100F83F88 /* top_bg.png */,
@@ -875,7 +878,6 @@
 				A936A05B146E85710006E96C /* 02hc-1.jpg in Resources */,
 				A936A05C146E85710006E96C /* 02hc-2.jpg in Resources */,
 				A936A05D146E85710006E96C /* 02洪辰-1.jpg in Resources */,
-				A936A05E146E85710006E96C /* 02洪辰-2.jpg in Resources */,
 				A936A05F146E85710006E96C /* 03lx-1.jpg in Resources */,
 				A936A060146E85710006E96C /* 03lx-2.jpg in Resources */,
 				A936A061146E85710006E96C /* 03刘忻-1.jpg in Resources */,
@@ -921,6 +923,8 @@
 				03FEBF881470FE6400E3E823 /* MainWindow.xib in Resources */,
 				F24BF6F814752B5E0025DB92 /* VoiceReplyController.xib in Resources */,
 				F24BF6FE14752BFE0025DB92 /* VoiceInputController.xib in Resources */,
+				F2821A12147619EA00EFA83A /* bg.jpg in Resources */,
+				F23334FE1476287900216536 /* 02洪辰-2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,6 +970,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: hongfei Tian (8MZZ7XQG7D)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -974,6 +979,7 @@
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = SupperGirl;
+				PROVISIONING_PROFILE = "6FA03F8F-6D2F-4FE1-A411-346E0ADC8B63";
 			};
 			name = Debug;
 		};
@@ -981,12 +987,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: hongfei Tian (8MZZ7XQG7D)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = SupperGirl_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = SupperGirl;
+				PROVISIONING_PROFILE = "6FA03F8F-6D2F-4FE1-A411-346E0ADC8B63";
 			};
 			name = Release;
 		};
