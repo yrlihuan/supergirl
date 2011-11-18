@@ -35,12 +35,14 @@
 - (void)viewDidLoad {
     movietable=[[MovieTableController alloc] init];
     movietable.mainviewcontroller=self;
+    movietable.controller=controller;
     movietable.tableView.frame=CGRectMake(0, 0, 320, 360);
     movietable.tableView.hidden=YES;
     [self.view addSubview:movietable.tableView];
    // test.frame=CGRectMake(0, 0, 100, 100);
     //test.tag=10;
     photosNavController=nil;
+    movietable.tableView.separatorColor=[UIColor redColor];
     // [self.view addSubview:test];
 	//[[avTouchController alloc] init];
   
@@ -97,8 +99,14 @@
     if (lightViewController != nil)
         [lightViewController release];
 }
+-(IBAction)musiclist:(UIButton*)sender{
+    [self buttonimagechange];
+    [sender setImage:[UIImage imageNamed:@"music_on.png"] forState:UIControlStateNormal];
+}
 -(IBAction)photolist:(UIButton*)sender
 {
+    [self buttonimagechange];
+    [sender setImage:[UIImage imageNamed:@"photo_on.png"] forState:UIControlStateNormal];
     /*
     if ([sender.titleLabel.text isEqual:@"light"])
     {
@@ -119,27 +127,67 @@
     
     NSLog(@"play succesfull");
 }
+-(void)movielistmove{
+    /*
+     kCATransitionFade淡出
+     kCATransitionMoveIn覆盖原图
+     kCATransitionPush推出
+     kCATransitionReveal底部显出来
+     setSubtype:也可以有四种类型：
+     kCATransitionFromRight；
+     kCATransitionFromLeft(默认值)
+     kCATransitionFromTop；
+     kCATransitionFromBottom
+     */
+    if (movietable.tableView.hidden==YES) {
+        movietable.tableView.hidden=NO;
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.3];
+    [animation setTimingFunction:[CAMediaTimingFunction
+                                  functionWithName:kCAMediaTimingFunctionDefault]];
+    [animation setType:kCATransitionMoveIn];
+    [animation setSubtype: kCATransitionFromBottom];
+    [movietable.view.layer addAnimation:animation forKey:@"Reveal"];
+    }else{
+        movietable.tableView.hidden=YES;
+    }
+}
+-(IBAction)movielisthiden:(UIButton*)sender{
+    movietable.tableView.hidden=YES;
+}
+
 -(IBAction)movielist:(UIButton*)sender
 {
-    
+    [self buttonimagechange];
+    [sender setImage:[UIImage imageNamed:@"video_on.png"] forState:UIControlStateNormal];
     movietable.tableView.layer.shadowOffset = CGSizeMake(0   , 4);
     movietable.tableView.backgroundColor=[UIColor colorWithWhite:1 alpha:1];
    // movietable.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     movietable.tableView.layer.shadowOpacity = 0.8;
     movietable.tableView.layer.shadowColor = [UIColor blackColor].CGColor;
     movietable.tableView.frame=CGRectMake(0, 0, 320, 360);
-    movietable.tableView.center=CGPointMake(160   , -180);
-    movietable.tableView.hidden=((int)(1+movietable.tableView.hidden))%2;
+    movietable.tableView.center=CGPointMake(160   , 180);
+   // movietable.tableView.hidden=((int)movietable.tableView.hidden+1)%2;
+    //if (movietable.tableView.hidden==NO) {
+        [self movielistmove];
+   // }
+    
     // musictable.separatorColor=[UIColor blackColor];
-    myTimer =  [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(viewMove) userInfo:nil repeats:YES];
+   // myTimer =  [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(viewMove) userInfo:nil repeats:YES];
+    
      
     
 }
 -(IBAction)voicelist:(UIButton*)sender{
+    [self buttonimagechange];
+    [sender setImage:[UIImage imageNamed:@"voice_on.png"] forState:UIControlStateNormal];
     VoiceMailController* voicemenu=[[VoiceMailController alloc] init];
+    voicemenu.controller=controller;
     [self presentModalViewController:voicemenu animated:YES];
 }
 -(IBAction)cheerlist:(UIButton*)sender{
+    [self buttonimagechange];
+    [sender setImage:[UIImage imageNamed:@"cheer_on.png"] forState:UIControlStateNormal];
     if (lightViewController != nil)
         [lightViewController release];
     lightViewController = [[LightViewController alloc] init];// initWithNibName:@"LightViewController" bundle:nil];
@@ -147,19 +195,13 @@
     [self presentModalViewController:lightViewController animated:YES]; 
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];
 }
-- (void)viewMove{
-    CGPoint mm= movietable.tableView.center;
-    if (mm.y<180) {
-        mm.y=mm.y+90;
-         movietable.tableView.center=CGPointMake(mm.x, mm.y);
-        NSLog(@"move");
-        //myView.center = viewCenterPoint;
-    }
+-(void)buttonimagechange{
     
-    else 
-    {
-        [myTimer invalidate];
-    }
+    [musicbt setImage:[UIImage imageNamed:@"music_off.png"] forState:UIControlStateNormal];
+    [moviebt setImage:[UIImage imageNamed:@"video_off.png"] forState:UIControlStateNormal];
+    [photobt setImage:[UIImage imageNamed:@"photo_off.png"] forState:UIControlStateNormal];
+    [voicebt setImage:[UIImage imageNamed:@"voice_off.png"] forState:UIControlStateNormal];
+    [cheerbt setImage:[UIImage imageNamed:@"cheer_off.png"] forState:UIControlStateNormal];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -191,6 +233,20 @@
 - (void)dealloc {
     [super dealloc];
     [photosNavController release];
+    [controller release];
+     [movieplayer release];
+    [array release];
+    [movietable release];
+   [myTimer release];
+   [player release];
+    
+    [lightViewController release];
+    
+    [moviebt release];
+    [musicbt release];
+    [photobt release];
+    [cheerbt release];
+    [voicebt release];
 }
 
 @end

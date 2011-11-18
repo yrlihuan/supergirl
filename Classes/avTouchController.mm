@@ -63,7 +63,7 @@ void audioRouteChangeListenerCallback (
 {
     if( (songplaying>=0)&&(songplaying<[listData count])) {
         NSString *rowValue = [listData objectAtIndex:songplaying];
-        
+        cdcover.image=[UIImage imageNamed:[rowValue stringByAppendingString:@".jpg"]];
         NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: [[NSBundle mainBundle] pathForResource:rowValue ofType:@"mp3"]];
         [player stop];
         self.player=nil;
@@ -88,7 +88,14 @@ void audioRouteChangeListenerCallback (
        
         if (self.player)
         {
-            fileName.text = [NSString stringWithFormat: @"%@ (%d ch.)", [[player.url relativePath] lastPathComponent], player.numberOfChannels, nil];
+           // fileName.text = [NSString stringWithFormat: @"%@ (%d ch.)", [[player.url relativePath] lastPathComponent], player.numberOfChannels, nil];
+            NSString * musicname=[[player.url relativePath] lastPathComponent];
+            musicname=[musicname stringByDeletingPathExtension];
+            starname.text=(NSString*)[[musicname componentsSeparatedByString:@"_"] objectAtIndex:0];
+            musicname=(NSString*)[[musicname componentsSeparatedByString:@"_"] objectAtIndex:1];
+           
+           // NSLog(@"musicname:%@",musicname);
+            fileName.text = [NSString stringWithFormat: @"%@", musicname, nil];
             [self updateViewForPlayerInfo:player];
             [self updateViewForPlayerState:player];
             player.numberOfLoops = 1;
@@ -166,25 +173,40 @@ void audioRouteChangeListenerCallback (
     musictable.layer.shadowOffset = CGSizeMake(0   , 4);
     musictable.layer.shadowOpacity = 0.8;
     musictable.layer.shadowColor = [UIColor blackColor].CGColor;
-    musictable.center=CGPointMake(160   , -180);
-    musictable.hidden=((int)(1+musictable.hidden))%2;
+    musictable.center=CGPointMake(160   , 180);
+   // musictable.hidden=((int)(1+musictable.hidden))%2;
    // musictable.separatorColor=[UIColor blackColor];
-    myTimer =  [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(viewMove) userInfo:nil repeats:YES];
+    [self musiclistmove];
    
 }
-- (void)viewMove{
-    CGPoint mm=musictable.center;
-    if (mm.y<180) {
-        mm.y=mm.y+90;
-      musictable.center=CGPointMake(mm.x, mm.y);
-    NSLog(@"move");
-        //myView.center = viewCenterPoint;
-    }
+-(IBAction)musiclisthiden:(UIButton*)sender{
+    musictable.hidden=YES;
     
-    else 
-    {
-        [myTimer invalidate];
-     }
+}
+-(void)musiclistmove{
+    /*
+     kCATransitionFade淡出
+     kCATransitionMoveIn覆盖原图
+     kCATransitionPush推出
+     kCATransitionReveal底部显出来
+     setSubtype:也可以有四种类型：
+     kCATransitionFromRight；
+     kCATransitionFromLeft(默认值)
+     kCATransitionFromTop；
+     kCATransitionFromBottom
+     */ 
+    if (musictable.hidden==YES) {
+        musictable.hidden=NO;
+        CATransition *animation = [CATransition animation];
+        [animation setDuration:0.3];
+        [animation setTimingFunction:[CAMediaTimingFunction
+                                      functionWithName:kCAMediaTimingFunctionDefault]];
+        [animation setType:kCATransitionMoveIn];
+        [animation setSubtype: kCATransitionFromBottom];
+        [musictable.layer addAnimation:animation forKey:@"Reveal"];
+    }else{
+        musictable.hidden=YES;
+    }
 }
 - (IBAction)lyclist:(UIButton*)sender
 {
@@ -195,7 +217,7 @@ void audioRouteChangeListenerCallback (
 -(void)setlist:(NSInteger) list
 {
     if (list==1) {
-        array = [[NSArray alloc] initWithObjects:@"MusicList", @"刘忻_如果有一天", @"杨洋_等爱",@"段林希_追梦的孩子",@"洪辰_爱多少",@"苏妙玲_背影里的沉默", nil];
+        array = [[NSArray alloc] initWithObjects:@"刘忻_如果有一天", @"杨洋_等爱",@"段林希_追梦的孩子",@"洪辰_爱多少",@"苏妙玲_背影里的沉默", nil];
     }
     else if(list==3)
     {
@@ -234,7 +256,7 @@ void audioRouteChangeListenerCallback (
     }
     else 
     {
-        if (cdcenter.x>150) {
+        if (cdcenter.x>161) {
             cdcenter.x=cdcenter.x-1;
         }
         else {
@@ -257,7 +279,7 @@ void audioRouteChangeListenerCallback (
     songplaying=2;
       
 	playBtnBG = [[UIImage imageNamed:@"play.png"] retain];
-	pauseBtnBG = [[UIImage imageNamed:@"pause3.png"] retain];
+	pauseBtnBG = [[UIImage imageNamed:@"suspend.png"] retain];
     musicplayBtnBG=[[UIImage imageNamed:@"music_play_off.png"] retain];
     musicpauseBtnBG=[[UIImage imageNamed:@"music_play_on.png"] retain];
     
@@ -275,6 +297,7 @@ void audioRouteChangeListenerCallback (
 	duration.adjustsFontSizeToFitWidth = YES;
 	currentTime.adjustsFontSizeToFitWidth = YES;
 	progressBar.minimumValue = 0.0;	
+    musictable.separatorColor=[[UIColor redColor]colorWithAlphaComponent:0.5];
     /*
     if( (songplaying>=0)&&(songplaying<[listData count])) {
         NSString *rowValue = [listData objectAtIndex:songplaying];
@@ -503,7 +526,7 @@ void audioRouteChangeListenerCallback (
 - (void)dealloc
 {
 	[super dealloc];
-	
+	[cdcover release];
 	[fileName release];
 	[playButton release];
 	[ffwButton release];
@@ -622,7 +645,7 @@ void RouteChangeListener(	void *                  inClientData,
 #pragma mark Table View Data Source Methods
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-    return [self.listData count];
+    return ([self.listData count]+1);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -636,25 +659,25 @@ void RouteChangeListener(	void *                  inClientData,
 							 SimpleTableIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc]
-				 initWithStyle:UITableViewCellStyleDefault
+				 initWithStyle:UITableViewCellStyleSubtitle
 				 reuseIdentifier:SimpleTableIdentifier] autorelease];
     }
 	
     
     NSUInteger row = [indexPath row];
-    if (row>0) {
-        
-        UIImage *image = [UIImage imageNamed:@"music_photo.png"];
-        cell.imageView.image = image;
-    }
-    cell.textLabel.text = [listData objectAtIndex:row];
+    if (row<[self.listData count]) {
+    
+    cell.imageView.image=[UIImage imageNamed:@"playlist_song.png"];
+    NSString * musicname=[listData objectAtIndex:row];
+    
+    NSString * musicstar=(NSString*)[[musicname componentsSeparatedByString:@"_"] objectAtIndex:0];
+    musicname=(NSString*)[[musicname componentsSeparatedByString:@"_"] objectAtIndex:1];
+  //  NSLog(@"musicname  :::%@   ::%@",[[musicname componentsSeparatedByString:@"_"] objectAtIndex:0],[[musicname componentsSeparatedByString:@"_"] objectAtIndex:1]);
+    cell.detailTextLabel.text=musicstar;
+    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:13];
+    cell.textLabel.text = musicname;
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
-	
-	if (row < 7)
-        cell.detailTextLabel.text = @"Mr. Disney";
-    else
-        cell.detailTextLabel.text = @"Mr. Tolkien";
-	
+    }
     return cell;
 }
 
@@ -665,15 +688,13 @@ void RouteChangeListener(	void *                  inClientData,
 indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
 	//NSUInteger row = [indexPath row];
     
-    NSUInteger row =1;
+    NSUInteger row =0;
     return row;
 }
 
 -(NSIndexPath *)tableView:(UITableView *)tableView
  willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSUInteger row = [indexPath row];
-    if (row == 0)
-        return nil;
+   // NSUInteger row = [indexPath row];
 	
     return indexPath;
 }
@@ -681,14 +702,23 @@ indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row = [indexPath row];
-    songplaying=row;
-	[self updateSong];
-    musictable.hidden=((int)(1+musictable.hidden))%2;
-}
+    if (row<[self.listData count]) {
+        songplaying=row;
+        [self updateSong];
+        musictable.hidden=((int)(1+musictable.hidden))%2;
+
+    }
+   }
 
 - (CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    NSUInteger row = [indexPath row];
+    if (row<[self.listData count]) {
+        return 47;
+    }else{
+        return 300;
+    }
+    
 }
 @end
 

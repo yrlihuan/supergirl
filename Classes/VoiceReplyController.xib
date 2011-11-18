@@ -85,7 +85,7 @@
 								<float key="IBUISectionFooterHeight">22</float>
 							</object>
 						</object>
-						<string key="NSFrame">{{0, 44}, {320, 416}}</string>
+						<string key="NSFrame">{{0, 42}, {320, 416}}</string>
 						<reference key="NSSuperview" ref="1066680146"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="191822878"/>
@@ -99,7 +99,7 @@
 					<object class="IBUIImageView" id="51201955">
 						<reference key="NSNextResponder" ref="1066680146"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 51}</string>
+						<string key="NSFrameSize">{320, 49}</string>
 						<reference key="NSSuperview" ref="1066680146"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="180267140"/>
@@ -114,7 +114,7 @@
 					<object class="IBUIButton" id="180267140">
 						<reference key="NSNextResponder" ref="1066680146"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{7, 11}, {40, 30}}</string>
+						<string key="NSFrame">{{9, 9}, {56, 26}}</string>
 						<reference key="NSSuperview" ref="1066680146"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="324873186"/>
@@ -136,9 +136,9 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="881951554">
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">top_btn.png</string>
+							<string key="NSResourceName">back.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="57410317">
 							<string key="name">Helvetica-Bold</string>
@@ -172,22 +172,22 @@
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
+						<float key="IBUIMinimumFontSize">15</float>
 						<int key="IBUITextAlignment">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">1</int>
-							<int key="size">4</int>
+							<double key="pointSize">15</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
-							<double key="NSSize">14</double>
+							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
 					<object class="IBUIButton" id="912331022">
 						<reference key="NSNextResponder" ref="1066680146"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{267, 13}, {43, 25}}</string>
+						<string key="NSFrame">{{267, 9}, {40, 26}}</string>
 						<reference key="NSSuperview" ref="1066680146"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="707253380"/>
@@ -211,7 +211,10 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">voice_comment.png</string>
 						</object>
-						<reference key="IBUINormalBackgroundImage" ref="881951554"/>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">top_btn.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="57410317"/>
 						<reference key="IBUIFont" ref="528262659"/>
 					</object>
@@ -506,6 +509,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>back.png</string>
 				<string>top_btn.png</string>
 				<string>topbar_back.png</string>
 				<string>voice_back.png</string>
@@ -513,6 +517,7 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{111, 52}</string>
 				<string>{86, 51}</string>
 				<string>{480, 111}</string>
 				<string>{640, 113}</string>

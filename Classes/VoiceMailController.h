@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "JSON.h"
 #import "VoiceMailStar.h"
+#import "avTouchController.h"
 @interface VoiceMailController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray *listData;
-
+    avTouchController *controller;
 }
 @property (nonatomic,retain) NSArray *listData;
+
 -(IBAction)backmain:(UIButton*)sender;
+@property (nonatomic,retain) avTouchController *controller;
 @end
